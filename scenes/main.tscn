@@ -1,0 +1,299 @@
+[gd_scene load_steps=30 format=3 uid="uid://b3c7sg7crquj7"]
+
+[ext_resource type="Script" path="res://scripts/Player.gd" id="2_dhijy"]
+[ext_resource type="Texture2D" uid="uid://biw0lmf7oxf1x" path="res://assets/fighter_lr.png" id="3_3r367"]
+[ext_resource type="Script" path="res://scripts/Robot.gd" id="5_7rpa6"]
+[ext_resource type="Texture2D" uid="uid://bkb0i5k767dt7" path="res://assets/robot-spritesheet-transparent.png" id="5_w6oqn"]
+[ext_resource type="Shape2D" uid="uid://cwlt877pcdoo1" path="res://robot_capsule_shape_2d.tres" id="6_mpqw0"]
+[ext_resource type="Texture2D" uid="uid://dl2lsf4c7anrp" path="res://assets/terrain_block.png" id="7_8j6b4"]
+[ext_resource type="Texture2D" uid="uid://cg5a5o4iewhii" path="res://assets/parallax/parallax-mountain-bg-1280.png" id="7_nkc2y"]
+[ext_resource type="Texture2D" uid="uid://b4mnoeqpf7p8k" path="res://assets/parallax/parallax-mountain-mountains-1280.png" id="8_5c1bv"]
+[ext_resource type="Texture2D" uid="uid://ba402kqyim604" path="res://assets/parallax/parallax-mountain-trees-1280.png" id="8_fsuwi"]
+[ext_resource type="Texture2D" uid="uid://opinqxrvd1yg" path="res://assets/parallax/parallax-mountain-montain-far-1280.png" id="8_p3u3n"]
+[ext_resource type="Texture2D" uid="uid://bu7blssngx43k" path="res://assets/parallax/parallax-mountain-foreground-trees-1280.png" id="9_njrp5"]
+[ext_resource type="Script" path="res://scenes/PlayerCamera.gd" id="12_e8cjt"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_5f4aw"]
+size = Vector2(5120, 720)
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_6bd5g"]
+size = Vector2(7.98438, 1)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_cyrs3"]
+atlas = ExtResource("5_w6oqn")
+region = Rect2(0, 0, 16, 22)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_mgmjn"]
+atlas = ExtResource("5_w6oqn")
+region = Rect2(16, 0, 16, 22)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_4iqjc"]
+atlas = ExtResource("5_w6oqn")
+region = Rect2(32, 0, 16, 22)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_gm8ne"]
+atlas = ExtResource("5_w6oqn")
+region = Rect2(48, 0, 16, 22)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_rt42c"]
+atlas = ExtResource("5_w6oqn")
+region = Rect2(64, 0, 16, 22)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_56lbc"]
+atlas = ExtResource("5_w6oqn")
+region = Rect2(80, 0, 16, 22)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_3oes1"]
+atlas = ExtResource("5_w6oqn")
+region = Rect2(96, 0, 16, 22)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_k2e7w"]
+atlas = ExtResource("5_w6oqn")
+region = Rect2(0, 22, 16, 22)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_jdwmu"]
+atlas = ExtResource("5_w6oqn")
+region = Rect2(16, 22, 16, 22)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_wmtew"]
+atlas = ExtResource("5_w6oqn")
+region = Rect2(32, 22, 16, 22)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_xk1sf"]
+atlas = ExtResource("5_w6oqn")
+region = Rect2(48, 22, 16, 22)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_of1gq"]
+atlas = ExtResource("5_w6oqn")
+region = Rect2(64, 22, 16, 22)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_lj21s"]
+atlas = ExtResource("5_w6oqn")
+region = Rect2(80, 22, 16, 22)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_x0qsp"]
+atlas = ExtResource("5_w6oqn")
+region = Rect2(96, 22, 16, 22)
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_l4rrx"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_cyrs3")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_mgmjn")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_4iqjc")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_gm8ne")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_rt42c")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_56lbc")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_3oes1")
+}],
+"loop": true,
+"name": &"idle",
+"speed": 5.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_k2e7w")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_jdwmu")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_wmtew")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_xk1sf")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_of1gq")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_lj21s")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_x0qsp")
+}],
+"loop": true,
+"name": &"run",
+"speed": 5.0
+}]
+
+[node name="main" type="Node2D"]
+
+[node name="ParallaxBackground" type="ParallaxBackground" parent="."]
+scroll_limit_end = Vector2(5120, 720)
+scroll_ignore_camera_zoom = true
+
+[node name="Sprite2D" type="Sprite2D" parent="ParallaxBackground"]
+texture = ExtResource("7_nkc2y")
+centered = false
+
+[node name="mountain-far" type="ParallaxLayer" parent="ParallaxBackground"]
+position = Vector2(0, -1)
+motion_scale = Vector2(0.1, 0.1)
+motion_mirroring = Vector2(1280, 0)
+
+[node name="mountain-far-sprite" type="Sprite2D" parent="ParallaxBackground/mountain-far"]
+texture = ExtResource("8_p3u3n")
+centered = false
+
+[node name="mountains" type="ParallaxLayer" parent="ParallaxBackground"]
+motion_scale = Vector2(0.4, 0.4)
+motion_mirroring = Vector2(1280, 0)
+
+[node name="mountain-sprite" type="Sprite2D" parent="ParallaxBackground/mountains"]
+position = Vector2(4, 339)
+texture = ExtResource("8_5c1bv")
+centered = false
+
+[node name="trees" type="ParallaxLayer" parent="ParallaxBackground"]
+motion_scale = Vector2(0.6, 0.6)
+motion_mirroring = Vector2(1280, 0)
+
+[node name="trees-sprite" type="Sprite2D" parent="ParallaxBackground/trees"]
+position = Vector2(4, 339)
+texture = ExtResource("8_fsuwi")
+centered = false
+
+[node name="foreground-trees" type="ParallaxLayer" parent="ParallaxBackground"]
+motion_scale = Vector2(0.8, 0.8)
+motion_mirroring = Vector2(1280, 0)
+
+[node name="foreground-trees-sprite" type="Sprite2D" parent="ParallaxBackground/foreground-trees"]
+position = Vector2(4, 339)
+texture = ExtResource("9_njrp5")
+centered = false
+
+[node name="World" type="Area2D" parent="."]
+
+[node name="WorldBounds" type="CollisionShape2D" parent="World"]
+position = Vector2(1000, 400)
+shape = SubResource("RectangleShape2D_5f4aw")
+
+[node name="GroundTiled" type="Node2D" parent="World"]
+position = Vector2(-139, -58)
+
+[node name="GroundBlock" type="StaticBody2D" parent="World/GroundTiled"]
+texture_filter = 3
+texture_repeat = 2
+position = Vector2(362, 349)
+metadata/_edit_group_ = true
+
+[node name="GroundBlock" type="TextureRect" parent="World/GroundTiled/GroundBlock"]
+offset_right = 256.0
+offset_bottom = 48.0
+texture = ExtResource("7_8j6b4")
+stretch_mode = 1
+metadata/_edit_use_anchors_ = true
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="World/GroundTiled/GroundBlock"]
+position = Vector2(128, 24)
+scale = Vector2(32, 48)
+shape = SubResource("RectangleShape2D_6bd5g")
+
+[node name="GroundTiled2" type="Node2D" parent="World"]
+position = Vector2(-139, -58)
+
+[node name="GroundBlock" type="StaticBody2D" parent="World/GroundTiled2"]
+texture_filter = 3
+texture_repeat = 2
+position = Vector2(1335, 370)
+metadata/_edit_group_ = true
+
+[node name="GroundBlock" type="TextureRect" parent="World/GroundTiled2/GroundBlock"]
+offset_right = 256.0
+offset_bottom = 48.0
+texture = ExtResource("7_8j6b4")
+stretch_mode = 1
+metadata/_edit_use_anchors_ = true
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="World/GroundTiled2/GroundBlock"]
+position = Vector2(128, 24)
+scale = Vector2(32, 48)
+shape = SubResource("RectangleShape2D_6bd5g")
+
+[node name="GroundBlock2" type="StaticBody2D" parent="World/GroundTiled2"]
+texture_filter = 3
+texture_repeat = 2
+position = Vector2(1913, 375)
+metadata/_edit_group_ = true
+
+[node name="GroundBlock" type="TextureRect" parent="World/GroundTiled2/GroundBlock2"]
+offset_right = 256.0
+offset_bottom = 48.0
+texture = ExtResource("7_8j6b4")
+stretch_mode = 1
+metadata/_edit_use_anchors_ = true
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="World/GroundTiled2/GroundBlock2"]
+position = Vector2(128, 24)
+scale = Vector2(32, 48)
+shape = SubResource("RectangleShape2D_6bd5g")
+
+[node name="GroundBlock3" type="StaticBody2D" parent="World/GroundTiled2"]
+texture_filter = 3
+texture_repeat = 2
+position = Vector2(2541, 464)
+metadata/_edit_group_ = true
+
+[node name="GroundBlock" type="TextureRect" parent="World/GroundTiled2/GroundBlock3"]
+offset_right = 256.0
+offset_bottom = 48.0
+texture = ExtResource("7_8j6b4")
+stretch_mode = 1
+metadata/_edit_use_anchors_ = true
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="World/GroundTiled2/GroundBlock3"]
+position = Vector2(128, 24)
+scale = Vector2(32, 48)
+shape = SubResource("RectangleShape2D_6bd5g")
+
+[node name="Robot" type="CharacterBody2D" parent="World"]
+position = Vector2(361, 100)
+script = ExtResource("5_7rpa6")
+metadata/_edit_group_ = true
+
+[node name="MainCollisionShape" type="CollisionShape2D" parent="World/Robot"]
+shape = ExtResource("6_mpqw0")
+
+[node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="World/Robot"]
+sprite_frames = SubResource("SpriteFrames_l4rrx")
+animation = &"idle"
+
+[node name="FallTest" type="Area2D" parent="World/Robot"]
+
+[node name="MainCollisionShape2" type="CollisionShape2D" parent="World/Robot/FallTest"]
+shape = ExtResource("6_mpqw0")
+
+[node name="PlayerShip" type="RigidBody2D" parent="." node_paths=PackedStringArray("world_bounds")]
+position = Vector2(457, 165)
+gravity_scale = 0.0
+linear_damp = 0.99
+script = ExtResource("2_dhijy")
+world_bounds = NodePath("../World/WorldBounds")
+metadata/_edit_group_ = true
+
+[node name="PlayerSprite2D" type="Sprite2D" parent="PlayerShip"]
+texture = ExtResource("3_3r367")
+
+[node name="PlayerCollision" type="CollisionPolygon2D" parent="PlayerShip"]
+polygon = PackedVector2Array(-2, -25, 28, -14, 29, -12, 50, -3, 55, 9, 54, 12, 60, 13, 61, 20, 59, 23, 41, 21, 38, 23, 17, 22, 11, 20, -6, 28, -44, 27, -49, 6, -44, 4, -60, -12, -39, -10, -31, -3, -21, -10, -21, -16, -10, -27)
+
+[node name="PlayerCamera" type="Camera2D" parent="." node_paths=PackedStringArray("target")]
+position = Vector2(565, 7)
+limit_left = 0
+limit_top = 0
+script = ExtResource("12_e8cjt")
+target = NodePath("../PlayerShip")

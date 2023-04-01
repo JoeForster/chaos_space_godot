@@ -1,0 +1,27 @@
+[gd_scene load_steps=4 format=3 uid="uid://chc0fixcch0xl"]
+
+[ext_resource type="Texture2D" uid="uid://b1kyay8b4byob" path="res://assets/terrain.png" id="1_us4k3"]
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_o2k4p"]
+atlas = ExtResource("1_us4k3")
+region = Rect2(96, 400, 32, 48)
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_3vo8n"]
+size = Vector2(1, 1)
+
+[node name="GroundBlock" type="StaticBody2D"]
+position = Vector2(512, 388)
+metadata/_edit_group_ = true
+
+[node name="GroundBlock" type="TextureRect" parent="."]
+offset_right = 32.0
+offset_bottom = 48.0
+texture = SubResource("AtlasTexture_o2k4p")
+expand_mode = 1
+stretch_mode = 1
+metadata/_edit_use_anchors_ = true
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+position = Vector2(16, 24)
+scale = Vector2(32, 48)
+shape = SubResource("RectangleShape2D_3vo8n")
