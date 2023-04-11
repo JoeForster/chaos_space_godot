@@ -1,0 +1,67 @@
+[gd_scene load_steps=8 format=3 uid="uid://b5h21ex60anuh"]
+
+[ext_resource type="Script" path="res://scripts/PlayerPhysics.gd" id="1_lh0g6"]
+[ext_resource type="Texture2D" uid="uid://bk0bpb2ltdg8y" path="res://assets/fighter_td.png" id="2_lgub4"]
+[ext_resource type="Script" path="res://scripts/PlayerCamera.gd" id="3_ifnd0"]
+[ext_resource type="Texture2D" uid="uid://cgrr26kfqa65a" path="res://assets/parallax_topdown_proto/BackdropBlackLittleSparkBlack.png" id="4_wlybp"]
+[ext_resource type="Texture2D" uid="uid://cg5hor68ty4iw" path="res://assets/parallax_topdown_proto/Parallax60.png" id="5_ensi7"]
+[ext_resource type="Texture2D" uid="uid://3pvfvk44r0pj" path="res://assets/parallax_topdown_proto/Parallax80.png" id="6_wnlg2"]
+[ext_resource type="Texture2D" uid="uid://qm6d87pa4e8m" path="res://assets/parallax_topdown_proto/Parallax100.png" id="7_nf6y1"]
+
+[node name="topdown_proto" type="Node2D"]
+
+[node name="ParallaxBackground" type="ParallaxBackground" parent="."]
+follow_viewport_scale = 2.0
+scroll_ignore_camera_zoom = true
+
+[node name="Background" type="Sprite2D" parent="ParallaxBackground"]
+texture = ExtResource("4_wlybp")
+centered = false
+
+[node name="far" type="ParallaxLayer" parent="ParallaxBackground"]
+motion_scale = Vector2(0.05, 0.05)
+motion_mirroring = Vector2(2048, 2048)
+
+[node name="SpaceFar" type="Sprite2D" parent="ParallaxBackground/far"]
+texture = ExtResource("7_nf6y1")
+centered = false
+
+[node name="mid" type="ParallaxLayer" parent="ParallaxBackground"]
+motion_scale = Vector2(0.1, 0.1)
+motion_mirroring = Vector2(2048, 2048)
+
+[node name="SpaceMid" type="Sprite2D" parent="ParallaxBackground/mid"]
+texture = ExtResource("6_wnlg2")
+centered = false
+
+[node name="close" type="ParallaxLayer" parent="ParallaxBackground"]
+motion_scale = Vector2(0.3, 0.3)
+motion_mirroring = Vector2(2048, 2048)
+
+[node name="SpaceClose" type="Sprite2D" parent="ParallaxBackground/close"]
+texture = ExtResource("5_ensi7")
+centered = false
+
+[node name="PlayerShip" type="RigidBody2D" parent="."]
+position = Vector2(457, 165)
+gravity_scale = 0.0
+angular_damp = 5.0
+script = ExtResource("1_lh0g6")
+input_type = 3
+max_torque = 4000
+metadata/_edit_group_ = true
+
+[node name="PlayerCollision" type="CollisionPolygon2D" parent="PlayerShip"]
+rotation = 1.5708
+scale = Vector2(0.5, 0.5)
+polygon = PackedVector2Array(-32, -25, -40, -56, -50, -25, -51, 15, -60, 50, -48, 56, -38, 41, -25, 46, 25, 46, 39, 42, 48, 56, 60, 50, 51, 15, 50, -25, 40, -56, 32, -25, 0, -38)
+
+[node name="PlayerSprite2D" type="Sprite2D" parent="PlayerShip"]
+scale = Vector2(0.5, 0.5)
+texture = ExtResource("2_lgub4")
+
+[node name="PlayerCamera" type="Camera2D" parent="." node_paths=PackedStringArray("target")]
+position = Vector2(565, 7)
+limit_smoothed = true
+script = ExtResource("3_ifnd0")
+target = NodePath("../PlayerShip")

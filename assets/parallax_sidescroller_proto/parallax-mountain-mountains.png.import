@@ -2,16 +2,16 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://cdqf5j3gvuja3"
-path="res://.godot/imported/parallax-mountain-foreground-trees.png-1bfd30db161407112e2cf5ff74c1935d.ctex"
+uid="uid://c4jwa7ftay7j3"
+path="res://.godot/imported/parallax-mountain-mountains.png-c9b314c5c7682e5f4c695eca9920ba7d.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://assets/parallax/parallax-mountain-foreground-trees.png"
-dest_files=["res://.godot/imported/parallax-mountain-foreground-trees.png-1bfd30db161407112e2cf5ff74c1935d.ctex"]
+source_file="res://assets/parallax_sidescroller_proto/parallax-mountain-mountains.png"
+dest_files=["res://.godot/imported/parallax-mountain-mountains.png-c9b314c5c7682e5f4c695eca9920ba7d.ctex"]
 
 [params]
 

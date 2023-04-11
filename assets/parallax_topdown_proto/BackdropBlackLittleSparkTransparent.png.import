@@ -2,16 +2,16 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://c4jwa7ftay7j3"
-path="res://.godot/imported/parallax-mountain-mountains.png-3d140650d62d59abd5a20888f48670e1.ctex"
+uid="uid://dca7xnjxdbyo3"
+path="res://.godot/imported/BackdropBlackLittleSparkTransparent.png-9595963aeb1ba8e052b03394c6091695.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://assets/parallax/parallax-mountain-mountains.png"
-dest_files=["res://.godot/imported/parallax-mountain-mountains.png-3d140650d62d59abd5a20888f48670e1.ctex"]
+source_file="res://assets/parallax_topdown_proto/BackdropBlackLittleSparkTransparent.png"
+dest_files=["res://.godot/imported/BackdropBlackLittleSparkTransparent.png-9595963aeb1ba8e052b03394c6091695.ctex"]
 
 [params]
 

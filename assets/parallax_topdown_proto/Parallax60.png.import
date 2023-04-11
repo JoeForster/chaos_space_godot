@@ -2,16 +2,16 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://bt0vwx0jmq7b8"
-path="res://.godot/imported/parallax-mountain-bg.png-c2e9d043065345c9bdbd6c197537b563.ctex"
+uid="uid://cg5hor68ty4iw"
+path="res://.godot/imported/Parallax60.png-7b41d9d72b8d9539efc476dc2222193a.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://scripts/parallax-mountain-bg.png"
-dest_files=["res://.godot/imported/parallax-mountain-bg.png-c2e9d043065345c9bdbd6c197537b563.ctex"]
+source_file="res://assets/parallax_topdown_proto/Parallax60.png"
+dest_files=["res://.godot/imported/Parallax60.png-7b41d9d72b8d9539efc476dc2222193a.ctex"]
 
 [params]
 
