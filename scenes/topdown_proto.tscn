@@ -1,12 +1,15 @@
-[gd_scene load_steps=8 format=3 uid="uid://b5h21ex60anuh"]
+[gd_scene load_steps=11 format=3 uid="uid://d38hr800vi51v"]
 
+[ext_resource type="Texture2D" uid="uid://cgrr26kfqa65a" path="res://assets/topdown/parallax_bg/BackdropBlackLittleSparkBlack.png" id="1_j224e"]
 [ext_resource type="Script" path="res://scripts/PlayerPhysics.gd" id="1_lh0g6"]
-[ext_resource type="Texture2D" uid="uid://bk0bpb2ltdg8y" path="res://assets/fighter_td.png" id="2_lgub4"]
+[ext_resource type="Texture2D" uid="uid://qm6d87pa4e8m" path="res://assets/topdown/parallax_bg/Parallax100.png" id="2_j7xwi"]
 [ext_resource type="Script" path="res://scripts/PlayerCamera.gd" id="3_ifnd0"]
-[ext_resource type="Texture2D" uid="uid://cgrr26kfqa65a" path="res://assets/parallax_topdown_proto/BackdropBlackLittleSparkBlack.png" id="4_wlybp"]
-[ext_resource type="Texture2D" uid="uid://cg5hor68ty4iw" path="res://assets/parallax_topdown_proto/Parallax60.png" id="5_ensi7"]
-[ext_resource type="Texture2D" uid="uid://3pvfvk44r0pj" path="res://assets/parallax_topdown_proto/Parallax80.png" id="6_wnlg2"]
-[ext_resource type="Texture2D" uid="uid://qm6d87pa4e8m" path="res://assets/parallax_topdown_proto/Parallax100.png" id="7_nf6y1"]
+[ext_resource type="Texture2D" uid="uid://3pvfvk44r0pj" path="res://assets/topdown/parallax_bg/Parallax80.png" id="3_jrtko"]
+[ext_resource type="Texture2D" uid="uid://cg5hor68ty4iw" path="res://assets/topdown/parallax_bg/Parallax60.png" id="4_1ejo1"]
+[ext_resource type="Texture2D" uid="uid://bk0bpb2ltdg8y" path="res://assets/topdown/fighter_td.png" id="6_1djxu"]
+[ext_resource type="Script" path="res://scenes/DronePhysics.gd" id="7_4mlaa"]
+[ext_resource type="Texture2D" uid="uid://wsxgt288odn8" path="res://assets/topdown/Bomber2B.png" id="8_ofwqv"]
+[ext_resource type="PackedScene" uid="uid://b08lypesed6g4" path="res://scenes/planet.tscn" id="10_y8gml"]
 
 [node name="topdown_proto" type="Node2D"]
 
@@ -15,15 +18,17 @@ follow_viewport_scale = 2.0
 scroll_ignore_camera_zoom = true
 
 [node name="Background" type="Sprite2D" parent="ParallaxBackground"]
-texture = ExtResource("4_wlybp")
+texture = ExtResource("1_j224e")
 centered = false
 
 [node name="far" type="ParallaxLayer" parent="ParallaxBackground"]
+visible = false
 motion_scale = Vector2(0.05, 0.05)
 motion_mirroring = Vector2(2048, 2048)
 
 [node name="SpaceFar" type="Sprite2D" parent="ParallaxBackground/far"]
-texture = ExtResource("7_nf6y1")
+visible = false
+texture = ExtResource("2_j7xwi")
 centered = false
 
 [node name="mid" type="ParallaxLayer" parent="ParallaxBackground"]
@@ -31,15 +36,15 @@ motion_scale = Vector2(0.1, 0.1)
 motion_mirroring = Vector2(2048, 2048)
 
 [node name="SpaceMid" type="Sprite2D" parent="ParallaxBackground/mid"]
-texture = ExtResource("6_wnlg2")
+texture = ExtResource("3_jrtko")
 centered = false
 
 [node name="close" type="ParallaxLayer" parent="ParallaxBackground"]
-motion_scale = Vector2(0.3, 0.3)
+motion_scale = Vector2(0.2, 0.2)
 motion_mirroring = Vector2(2048, 2048)
 
 [node name="SpaceClose" type="Sprite2D" parent="ParallaxBackground/close"]
-texture = ExtResource("5_ensi7")
+texture = ExtResource("4_1ejo1")
 centered = false
 
 [node name="PlayerShip" type="RigidBody2D" parent="."]
@@ -48,6 +53,7 @@ gravity_scale = 0.0
 angular_damp = 5.0
 script = ExtResource("1_lh0g6")
 input_type = 3
+max_speed = 100
 max_torque = 4000
 metadata/_edit_group_ = true
 
@@ -58,10 +64,32 @@ polygon = PackedVector2Array(-32, -25, -40, -56, -50, -25, -51, 15, -60, 50, -48
 
 [node name="PlayerSprite2D" type="Sprite2D" parent="PlayerShip"]
 scale = Vector2(0.5, 0.5)
-texture = ExtResource("2_lgub4")
+texture = ExtResource("6_1djxu")
+
+[node name="EnemyTest" type="RigidBody2D" parent="."]
+position = Vector2(774, 259)
+gravity_scale = 0.0
+angular_damp = 5.0
+script = ExtResource("7_4mlaa")
+metadata/_edit_group_ = true
+
+[node name="VesselCollision" type="CollisionPolygon2D" parent="EnemyTest"]
+rotation = 1.5708
+scale = Vector2(0.5, 0.5)
+polygon = PackedVector2Array(-2.00006, -12, -10, -4, -13.9999, 10, 14.0001, 9.99988, 10, -4.00012)
+
+[node name="VesselSprite2D" type="Sprite2D" parent="EnemyTest"]
+scale = Vector2(0.5, 0.5)
+texture = ExtResource("8_ofwqv")
 
 [node name="PlayerCamera" type="Camera2D" parent="." node_paths=PackedStringArray("target")]
 position = Vector2(565, 7)
 limit_smoothed = true
 script = ExtResource("3_ifnd0")
 target = NodePath("../PlayerShip")
+
+[node name="Planet" parent="." instance=ExtResource("10_y8gml")]
+position = Vector2(876, 265)
+
+[connection signal="body_entered" from="Planet" to="PlayerShip" method="_on_planet_body_entered"]
+[connection signal="body_exited" from="Planet" to="PlayerShip" method="_on_planet_body_exited"]

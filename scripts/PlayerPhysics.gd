@@ -8,15 +8,17 @@ enum INPUT_TYPE { KINEMATIC, HORIZONTAL, THROTTLE, TOP_DOWN }
 @export var max_thrust = 500
 @export var max_torque = 1000
 @export var world_bounds : CollisionShape2D
+@export var brake_damp = 0.995
 
 var input_throttle = 0.0
 var input_directional = Vector2.ZERO
-
-
+var braking = false
+var default_linear_damp : float
+var landing_planets : Array
 
 # Called when the node enters the scene tree for the first time.
 func _ready():
-	pass
+	default_linear_damp = linear_damp
 
 func _physics_process_kinematic(delta):
 	var velocity = input_directional
@@ -27,8 +29,6 @@ func _physics_process_kinematic(delta):
 	position += velocity * delta
 	
 func _physics_process_horizontal(delta):
-	
-
 	# TODO we want to limit the angle somehow to prevent flipping, but this
 	# breaks the torque effect once beyond the angle
 	#if get_rotation_degrees() > 45:
@@ -38,13 +38,14 @@ func _physics_process_horizontal(delta):
 	
 	var thrust_local = input_directional
 
+
 	if thrust_local.length() > 0:
 		var thrust_local_norm = thrust_local.normalized()
 		var global_thrust = transform.basis_xform(thrust_local_norm * max_thrust)
 		apply_force(global_thrust)
 		#apply_force(thrust_local * max_thrust)
 		$PlayerSprite2D.set_flip_h(thrust_local_norm.x < 0)
-	
+
 	var facing_right = $PlayerSprite2D.is_flipped_h()
 	
 	# Rotate towards horizontal
@@ -78,6 +79,8 @@ func _physics_process_top_down(delta):
 	if thrust_local.length() > 0:
 		var global_thrust = transform.basis_xform(thrust_local)
 		apply_force(global_thrust)
+
+	linear_damp = brake_damp if braking else default_linear_damp
 		
 	apply_torque(input_directional.x * max_torque)
 
@@ -116,4 +119,24 @@ func _process(delta):
 		input_throttle = min(1.0, input_throttle + delta * throttle_per_sec)
 	if Input.is_action_pressed("throttle_down"):
 		input_throttle = max(0.0, input_throttle - delta * throttle_per_sec)
-	print(input_throttle)
+		braking = (input_throttle == 0.0)
+	else:
+		braking = false
+
+	# TODO proper level transition manager; background
+	if Input.is_action_just_released("use"):
+		var current_scene = get_tree().current_scene.name
+		if current_scene == "sidescroller_proto":
+			get_tree().change_scene_to_file("res://scenes/topdown_proto.tscn")
+		elif current_scene == "topdown_proto":
+			var num_planets = landing_planets.size()
+			if num_planets > 0:
+				get_tree().change_scene_to_file("res://scenes/sidescroller_proto.tscn")
+
+# TODO this shouldn't be in physics script?
+func _on_planet_body_entered(body):
+	landing_planets.append(body)
+
+func _on_planet_body_exited(body):
+	landing_planets.erase(body)
+
