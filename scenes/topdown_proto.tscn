@@ -40,14 +40,44 @@ texture = ExtResource("3_jrtko")
 centered = false
 
 [node name="close" type="ParallaxLayer" parent="ParallaxBackground"]
+visible = false
 motion_scale = Vector2(0.2, 0.2)
 motion_mirroring = Vector2(2048, 2048)
 
 [node name="SpaceClose" type="Sprite2D" parent="ParallaxBackground/close"]
+visible = false
 texture = ExtResource("4_1ejo1")
 centered = false
 
-[node name="PlayerShip" type="RigidBody2D" parent="."]
+[node name="PlanetAlpha" parent="." instance=ExtResource("10_y8gml")]
+position = Vector2(876, 265)
+planetID = "alpha"
+
+[node name="PlanetBeta" parent="." instance=ExtResource("10_y8gml")]
+position = Vector2(1603, 1038)
+planetID = "beta"
+
+[node name="ParallaxForeground" type="ParallaxBackground" parent="."]
+follow_viewport_scale = 2.0
+scroll_ignore_camera_zoom = true
+
+[node name="close" type="ParallaxLayer" parent="ParallaxForeground"]
+motion_scale = Vector2(0.2, 0.2)
+motion_mirroring = Vector2(2048, 2048)
+
+[node name="SpaceClose" type="Sprite2D" parent="ParallaxForeground/close"]
+texture = ExtResource("4_1ejo1")
+centered = false
+
+[node name="PlayerCamera" type="Camera2D" parent="." node_paths=PackedStringArray("target")]
+position = Vector2(565, 7)
+limit_smoothed = true
+script = ExtResource("3_ifnd0")
+target = NodePath("../WorldObjects/PlayerShip")
+
+[node name="WorldObjects" type="Node" parent="."]
+
+[node name="PlayerShip" type="RigidBody2D" parent="WorldObjects" groups=["PlayerShip"]]
 position = Vector2(457, 165)
 gravity_scale = 0.0
 angular_damp = 5.0
@@ -57,39 +87,32 @@ max_speed = 100
 max_torque = 4000
 metadata/_edit_group_ = true
 
-[node name="PlayerCollision" type="CollisionPolygon2D" parent="PlayerShip"]
+[node name="PlayerCollision" type="CollisionPolygon2D" parent="WorldObjects/PlayerShip"]
 rotation = 1.5708
 scale = Vector2(0.5, 0.5)
 polygon = PackedVector2Array(-32, -25, -40, -56, -50, -25, -51, 15, -60, 50, -48, 56, -38, 41, -25, 46, 25, 46, 39, 42, 48, 56, 60, 50, 51, 15, 50, -25, 40, -56, 32, -25, 0, -38)
 
-[node name="PlayerSprite2D" type="Sprite2D" parent="PlayerShip"]
+[node name="PlayerSprite2D" type="Sprite2D" parent="WorldObjects/PlayerShip"]
 scale = Vector2(0.5, 0.5)
 texture = ExtResource("6_1djxu")
 
-[node name="EnemyTest" type="RigidBody2D" parent="."]
+[node name="EnemyTest" type="RigidBody2D" parent="WorldObjects"]
 position = Vector2(774, 259)
 gravity_scale = 0.0
 angular_damp = 5.0
 script = ExtResource("7_4mlaa")
 metadata/_edit_group_ = true
 
-[node name="VesselCollision" type="CollisionPolygon2D" parent="EnemyTest"]
+[node name="VesselCollision" type="CollisionPolygon2D" parent="WorldObjects/EnemyTest"]
 rotation = 1.5708
 scale = Vector2(0.5, 0.5)
 polygon = PackedVector2Array(-2.00006, -12, -10, -4, -13.9999, 10, 14.0001, 9.99988, 10, -4.00012)
 
-[node name="VesselSprite2D" type="Sprite2D" parent="EnemyTest"]
+[node name="VesselSprite2D" type="Sprite2D" parent="WorldObjects/EnemyTest"]
 scale = Vector2(0.5, 0.5)
 texture = ExtResource("8_ofwqv")
 
-[node name="PlayerCamera" type="Camera2D" parent="." node_paths=PackedStringArray("target")]
-position = Vector2(565, 7)
-limit_smoothed = true
-script = ExtResource("3_ifnd0")
-target = NodePath("../PlayerShip")
-
-[node name="Planet" parent="." instance=ExtResource("10_y8gml")]
-position = Vector2(876, 265)
-
-[connection signal="body_entered" from="Planet" to="PlayerShip" method="_on_planet_body_entered"]
-[connection signal="body_exited" from="Planet" to="PlayerShip" method="_on_planet_body_exited"]
+[connection signal="body_entered" from="PlanetAlpha" to="PlanetAlpha" method="_on_body_entered"]
+[connection signal="body_exited" from="PlanetAlpha" to="PlanetAlpha" method="_on_body_exited"]
+[connection signal="body_entered" from="PlanetBeta" to="PlanetBeta" method="_on_body_entered"]
+[connection signal="body_exited" from="PlanetBeta" to="PlanetBeta" method="_on_body_exited"]

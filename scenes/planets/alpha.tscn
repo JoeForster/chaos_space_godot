@@ -1,17 +1,17 @@
 [gd_scene load_steps=30 format=3 uid="uid://yd7xliim3fgw"]
 
-[ext_resource type="Texture2D" uid="uid://cg5a5o4iewhii" path="res://assets/sidescroller/parallax_bg/parallax-mountain-bg-1280.png" id="1_md7lh"]
-[ext_resource type="Texture2D" uid="uid://opinqxrvd1yg" path="res://assets/sidescroller/parallax_bg/parallax-mountain-montain-far-1280.png" id="2_6hra6"]
-[ext_resource type="Texture2D" uid="uid://b4mnoeqpf7p8k" path="res://assets/sidescroller/parallax_bg/parallax-mountain-mountains-1280.png" id="3_w3ce2"]
-[ext_resource type="Texture2D" uid="uid://ba402kqyim604" path="res://assets/sidescroller/parallax_bg/parallax-mountain-trees-1280.png" id="4_l481s"]
-[ext_resource type="Texture2D" uid="uid://bu7blssngx43k" path="res://assets/sidescroller/parallax_bg/parallax-mountain-foreground-trees-1280.png" id="5_ulx68"]
-[ext_resource type="Texture2D" uid="uid://dl2lsf4c7anrp" path="res://assets/sidescroller/terrain_block.png" id="6_yghe4"]
-[ext_resource type="Script" path="res://scripts/Robot.gd" id="7_oes2r"]
-[ext_resource type="Shape2D" uid="uid://cwlt877pcdoo1" path="res://robot_capsule_shape_2d.tres" id="8_lc3ke"]
-[ext_resource type="Texture2D" uid="uid://bkb0i5k767dt7" path="res://assets/sidescroller/robot-spritesheet-transparent.png" id="9_vjtjb"]
-[ext_resource type="Script" path="res://scripts/PlayerPhysics.gd" id="10_seq06"]
-[ext_resource type="Texture2D" uid="uid://biw0lmf7oxf1x" path="res://assets/sidescroller/fighter_lr.png" id="11_gg0fq"]
-[ext_resource type="Script" path="res://scripts/PlayerCamera.gd" id="12_elxko"]
+[ext_resource type="Texture2D" uid="uid://cg5a5o4iewhii" path="res://assets/sidescroller/parallax_bg/parallax-mountain-bg-1280.png" id="1_n538s"]
+[ext_resource type="Texture2D" uid="uid://opinqxrvd1yg" path="res://assets/sidescroller/parallax_bg/parallax-mountain-montain-far-1280.png" id="2_amig0"]
+[ext_resource type="Texture2D" uid="uid://b4mnoeqpf7p8k" path="res://assets/sidescroller/parallax_bg/parallax-mountain-mountains-1280.png" id="3_qi8gm"]
+[ext_resource type="Texture2D" uid="uid://ba402kqyim604" path="res://assets/sidescroller/parallax_bg/parallax-mountain-trees-1280.png" id="4_lvouo"]
+[ext_resource type="Texture2D" uid="uid://bu7blssngx43k" path="res://assets/sidescroller/parallax_bg/parallax-mountain-foreground-trees-1280.png" id="5_wx2ys"]
+[ext_resource type="Texture2D" uid="uid://dl2lsf4c7anrp" path="res://assets/sidescroller/terrain_block.png" id="6_2pm3l"]
+[ext_resource type="Script" path="res://scripts/Robot.gd" id="7_5xpqw"]
+[ext_resource type="Shape2D" uid="uid://cwlt877pcdoo1" path="res://robot_capsule_shape_2d.tres" id="8_i41ou"]
+[ext_resource type="Texture2D" uid="uid://bkb0i5k767dt7" path="res://assets/sidescroller/robot-spritesheet-transparent.png" id="9_4db8t"]
+[ext_resource type="Script" path="res://scripts/PlayerPhysics.gd" id="10_i24d4"]
+[ext_resource type="Texture2D" uid="uid://biw0lmf7oxf1x" path="res://assets/sidescroller/fighter_lr.png" id="11_rjofv"]
+[ext_resource type="Script" path="res://scripts/PlayerCamera.gd" id="12_ilv2j"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_5f4aw"]
 size = Vector2(5120, 720)
@@ -20,59 +20,59 @@ size = Vector2(5120, 720)
 size = Vector2(7.98438, 1)
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_cyrs3"]
-atlas = ExtResource("9_vjtjb")
+atlas = ExtResource("9_4db8t")
 region = Rect2(0, 0, 16, 22)
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_mgmjn"]
-atlas = ExtResource("9_vjtjb")
+atlas = ExtResource("9_4db8t")
 region = Rect2(16, 0, 16, 22)
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_4iqjc"]
-atlas = ExtResource("9_vjtjb")
+atlas = ExtResource("9_4db8t")
 region = Rect2(32, 0, 16, 22)
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_gm8ne"]
-atlas = ExtResource("9_vjtjb")
+atlas = ExtResource("9_4db8t")
 region = Rect2(48, 0, 16, 22)
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_rt42c"]
-atlas = ExtResource("9_vjtjb")
+atlas = ExtResource("9_4db8t")
 region = Rect2(64, 0, 16, 22)
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_56lbc"]
-atlas = ExtResource("9_vjtjb")
+atlas = ExtResource("9_4db8t")
 region = Rect2(80, 0, 16, 22)
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_3oes1"]
-atlas = ExtResource("9_vjtjb")
+atlas = ExtResource("9_4db8t")
 region = Rect2(96, 0, 16, 22)
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_k2e7w"]
-atlas = ExtResource("9_vjtjb")
+atlas = ExtResource("9_4db8t")
 region = Rect2(0, 22, 16, 22)
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_jdwmu"]
-atlas = ExtResource("9_vjtjb")
+atlas = ExtResource("9_4db8t")
 region = Rect2(16, 22, 16, 22)
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_wmtew"]
-atlas = ExtResource("9_vjtjb")
+atlas = ExtResource("9_4db8t")
 region = Rect2(32, 22, 16, 22)
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_xk1sf"]
-atlas = ExtResource("9_vjtjb")
+atlas = ExtResource("9_4db8t")
 region = Rect2(48, 22, 16, 22)
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_of1gq"]
-atlas = ExtResource("9_vjtjb")
+atlas = ExtResource("9_4db8t")
 region = Rect2(64, 22, 16, 22)
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_lj21s"]
-atlas = ExtResource("9_vjtjb")
+atlas = ExtResource("9_4db8t")
 region = Rect2(80, 22, 16, 22)
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_x0qsp"]
-atlas = ExtResource("9_vjtjb")
+atlas = ExtResource("9_4db8t")
 region = Rect2(96, 22, 16, 22)
 
 [sub_resource type="SpriteFrames" id="SpriteFrames_l4rrx"]
@@ -137,7 +137,7 @@ scroll_limit_end = Vector2(5120, 720)
 scroll_ignore_camera_zoom = true
 
 [node name="Sprite2D" type="Sprite2D" parent="ParallaxBackground"]
-texture = ExtResource("1_md7lh")
+texture = ExtResource("1_n538s")
 centered = false
 
 [node name="mountain-far" type="ParallaxLayer" parent="ParallaxBackground"]
@@ -146,7 +146,7 @@ motion_scale = Vector2(0.1, 0.1)
 motion_mirroring = Vector2(1280, 0)
 
 [node name="mountain-far-sprite" type="Sprite2D" parent="ParallaxBackground/mountain-far"]
-texture = ExtResource("2_6hra6")
+texture = ExtResource("2_amig0")
 centered = false
 
 [node name="mountains" type="ParallaxLayer" parent="ParallaxBackground"]
@@ -155,7 +155,7 @@ motion_mirroring = Vector2(1280, 0)
 
 [node name="mountain-sprite" type="Sprite2D" parent="ParallaxBackground/mountains"]
 position = Vector2(4, 339)
-texture = ExtResource("3_w3ce2")
+texture = ExtResource("3_qi8gm")
 centered = false
 
 [node name="trees" type="ParallaxLayer" parent="ParallaxBackground"]
@@ -164,7 +164,7 @@ motion_mirroring = Vector2(1280, 0)
 
 [node name="trees-sprite" type="Sprite2D" parent="ParallaxBackground/trees"]
 position = Vector2(4, 339)
-texture = ExtResource("4_l481s")
+texture = ExtResource("4_lvouo")
 centered = false
 
 [node name="foreground-trees" type="ParallaxLayer" parent="ParallaxBackground"]
@@ -173,7 +173,7 @@ motion_mirroring = Vector2(1280, 0)
 
 [node name="foreground-trees-sprite" type="Sprite2D" parent="ParallaxBackground/foreground-trees"]
 position = Vector2(4, 339)
-texture = ExtResource("5_ulx68")
+texture = ExtResource("5_wx2ys")
 centered = false
 
 [node name="World" type="Area2D" parent="."]
@@ -194,7 +194,7 @@ metadata/_edit_group_ = true
 [node name="GroundBlock" type="TextureRect" parent="World/GroundTiled/GroundBlock"]
 offset_right = 256.0
 offset_bottom = 48.0
-texture = ExtResource("6_yghe4")
+texture = ExtResource("6_2pm3l")
 stretch_mode = 1
 metadata/_edit_use_anchors_ = true
 
@@ -215,7 +215,7 @@ metadata/_edit_group_ = true
 [node name="GroundBlock" type="TextureRect" parent="World/GroundTiled2/GroundBlock"]
 offset_right = 256.0
 offset_bottom = 48.0
-texture = ExtResource("6_yghe4")
+texture = ExtResource("6_2pm3l")
 stretch_mode = 1
 metadata/_edit_use_anchors_ = true
 
@@ -233,7 +233,7 @@ metadata/_edit_group_ = true
 [node name="GroundBlock" type="TextureRect" parent="World/GroundTiled2/GroundBlock2"]
 offset_right = 256.0
 offset_bottom = 48.0
-texture = ExtResource("6_yghe4")
+texture = ExtResource("6_2pm3l")
 stretch_mode = 1
 metadata/_edit_use_anchors_ = true
 
@@ -251,7 +251,7 @@ metadata/_edit_group_ = true
 [node name="GroundBlock" type="TextureRect" parent="World/GroundTiled2/GroundBlock3"]
 offset_right = 256.0
 offset_bottom = 48.0
-texture = ExtResource("6_yghe4")
+texture = ExtResource("6_2pm3l")
 stretch_mode = 1
 metadata/_edit_use_anchors_ = true
 
@@ -262,11 +262,11 @@ shape = SubResource("RectangleShape2D_6bd5g")
 
 [node name="Robot" type="CharacterBody2D" parent="World"]
 position = Vector2(361, 100)
-script = ExtResource("7_oes2r")
+script = ExtResource("7_5xpqw")
 metadata/_edit_group_ = true
 
 [node name="MainCollisionShape" type="CollisionShape2D" parent="World/Robot"]
-shape = ExtResource("8_lc3ke")
+shape = ExtResource("8_i41ou")
 
 [node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="World/Robot"]
 sprite_frames = SubResource("SpriteFrames_l4rrx")
@@ -275,19 +275,19 @@ animation = &"idle"
 [node name="FallTest" type="Area2D" parent="World/Robot"]
 
 [node name="MainCollisionShape2" type="CollisionShape2D" parent="World/Robot/FallTest"]
-shape = ExtResource("8_lc3ke")
+shape = ExtResource("8_i41ou")
 
 [node name="PlayerShip" type="RigidBody2D" parent="." node_paths=PackedStringArray("world_bounds")]
 position = Vector2(457, 165)
 gravity_scale = 0.0
 linear_damp = 0.99
-script = ExtResource("10_seq06")
+script = ExtResource("10_i24d4")
 input_type = 1
 world_bounds = NodePath("../World/WorldBounds")
 metadata/_edit_group_ = true
 
 [node name="PlayerSprite2D" type="Sprite2D" parent="PlayerShip"]
-texture = ExtResource("11_gg0fq")
+texture = ExtResource("11_rjofv")
 
 [node name="PlayerCollision" type="CollisionPolygon2D" parent="PlayerShip"]
 polygon = PackedVector2Array(-2, -25, 28, -14, 29, -12, 50, -3, 55, 9, 54, 12, 60, 13, 61, 20, 59, 23, 41, 21, 38, 23, 17, 22, 11, 20, -6, 28, -44, 27, -49, 6, -44, 4, -60, -12, -39, -10, -31, -3, -21, -10, -21, -16, -10, -27)
@@ -296,5 +296,5 @@ polygon = PackedVector2Array(-2, -25, 28, -14, 29, -12, 50, -3, 55, 9, 54, 12, 6
 position = Vector2(565, 7)
 limit_left = 0
 limit_top = 0
-script = ExtResource("12_elxko")
+script = ExtResource("12_ilv2j")
 target = NodePath("../PlayerShip")

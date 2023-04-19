@@ -14,7 +14,6 @@ var input_throttle = 0.0
 var input_directional = Vector2.ZERO
 var braking = false
 var default_linear_damp : float
-var landing_planets : Array
 
 # Called when the node enters the scene tree for the first time.
 func _ready():
@@ -126,17 +125,5 @@ func _process(delta):
 	# TODO proper level transition manager; background
 	if Input.is_action_just_released("use"):
 		var current_scene = get_tree().current_scene.name
-		if current_scene == "sidescroller_proto":
+		if current_scene != "topdown_proto":
 			get_tree().change_scene_to_file("res://scenes/topdown_proto.tscn")
-		elif current_scene == "topdown_proto":
-			var num_planets = landing_planets.size()
-			if num_planets > 0:
-				get_tree().change_scene_to_file("res://scenes/sidescroller_proto.tscn")
-
-# TODO this shouldn't be in physics script?
-func _on_planet_body_entered(body):
-	landing_planets.append(body)
-
-func _on_planet_body_exited(body):
-	landing_planets.erase(body)
-
