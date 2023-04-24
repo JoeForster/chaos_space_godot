@@ -2,16 +2,16 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://jpba4r5xuwll"
-path="res://.godot/imported/planet2.png-b590428faf698fb3b1223f27cd6ab352.ctex"
+uid="uid://cv1tu5a2atgsm"
+path="res://.godot/imported/sprite_solarsystem.png-0f5444d263de0997f70b6408396127d2.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://assets/topdown/planets/planet2.png"
-dest_files=["res://.godot/imported/planet2.png-b590428faf698fb3b1223f27cd6ab352.ctex"]
+source_file="res://planets/alpha/sprite_solarsystem.png"
+dest_files=["res://.godot/imported/sprite_solarsystem.png-0f5444d263de0997f70b6408396127d2.ctex"]
 
 [params]
 

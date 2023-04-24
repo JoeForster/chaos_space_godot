@@ -1,0 +1,21 @@
+[gd_scene load_steps=4 format=3 uid="uid://ccqcds4nkn5cm"]
+
+[ext_resource type="Script" path="res://scripts/WarpPoint.gd" id="1_ursy8"]
+[ext_resource type="Texture2D" uid="uid://c0gaccn22hhqt" path="res://assets/WB_base_d0.png" id="2_kfx80"]
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_jh16p"]
+radius = 51.2445
+
+[node name="WarpPoint" type="Area2D"]
+script = ExtResource("1_ursy8")
+metadata/_edit_group_ = true
+
+[node name="Sprite2D" type="Sprite2D" parent="."]
+scale = Vector2(0.1, 0.1)
+texture = ExtResource("2_kfx80")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+shape = SubResource("CircleShape2D_jh16p")
+
+[connection signal="body_entered" from="." to="." method="_on_body_entered"]
+[connection signal="body_exited" from="." to="." method="_on_body_exited"]

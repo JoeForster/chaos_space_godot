@@ -2,16 +2,16 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://deiy5ehrmbt40"
-path="res://.godot/imported/planet12.png-efd405235c63a5aace8cf2d1b61c148c.ctex"
+uid="uid://ddadaitb5tknc"
+path="res://.godot/imported/star_yellow04.png-b6519c0bfee51ff8bbf7fc4c9e7eb7d7.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://assets/topdown/planets/planet12.png"
-dest_files=["res://.godot/imported/planet12.png-efd405235c63a5aace8cf2d1b61c148c.ctex"]
+source_file="res://assets/galaxymap/star_yellow04.png"
+dest_files=["res://.godot/imported/star_yellow04.png-b6519c0bfee51ff8bbf7fc4c9e7eb7d7.ctex"]
 
 [params]
 

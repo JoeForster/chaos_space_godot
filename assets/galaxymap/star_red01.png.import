@@ -2,16 +2,16 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://b3penme6a4mxs"
-path="res://.godot/imported/planet19.png-725ce2b45c4d328014ad75282254d792.ctex"
+uid="uid://b777avapqm6f7"
+path="res://.godot/imported/star_red01.png-5765a5978799d0559854a4fdf18d9654.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://assets/topdown/planets/planet19.png"
-dest_files=["res://.godot/imported/planet19.png-725ce2b45c4d328014ad75282254d792.ctex"]
+source_file="res://assets/galaxymap/star_red01.png"
+dest_files=["res://.godot/imported/star_red01.png-5765a5978799d0559854a4fdf18d9654.ctex"]
 
 [params]
 

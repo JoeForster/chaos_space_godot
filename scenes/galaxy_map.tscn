@@ -1,0 +1,50 @@
+[gd_scene load_steps=6 format=3 uid="uid://lqtewp30y15l"]
+
+[ext_resource type="Texture2D" uid="uid://c1nnxi847qvse" path="res://assets/galaxymap/2DSpaceBG.png" id="1_hhbn2"]
+[ext_resource type="Texture2D" uid="uid://c1imiw6x0eqv0" path="res://assets/galaxymap/star_blue01.png" id="2_mrv17"]
+[ext_resource type="Texture2D" uid="uid://b777avapqm6f7" path="res://assets/galaxymap/star_red01.png" id="3_4duqj"]
+[ext_resource type="Script" path="res://scripts/GalaxyMapBody.gd" id="3_kqs3s"]
+[ext_resource type="Texture2D" uid="uid://ddadaitb5tknc" path="res://assets/galaxymap/star_yellow04.png" id="4_gj4ru"]
+
+[node name="GalaxyMap" type="Node2D"]
+
+[node name="Sprite2D" type="Sprite2D" parent="."]
+position = Vector2(-90, 377)
+texture = ExtResource("1_hhbn2")
+
+[node name="StarBlue01" type="Button" parent="."]
+offset_left = 243.0
+offset_top = 378.0
+offset_right = 1275.0
+offset_bottom = 1410.0
+scale = Vector2(0.1, 0.1)
+icon = ExtResource("2_mrv17")
+flat = true
+script = ExtResource("3_kqs3s")
+systemID = "1"
+
+[node name="StarRed01" type="Button" parent="."]
+offset_left = 465.0
+offset_top = 202.0
+offset_right = 1497.0
+offset_bottom = 1234.0
+scale = Vector2(0.1, 0.1)
+icon = ExtResource("3_4duqj")
+flat = true
+script = ExtResource("3_kqs3s")
+systemID = "2"
+
+[node name="StarYellow04" type="Button" parent="."]
+offset_left = 764.0
+offset_top = 347.0
+offset_right = 1796.0
+offset_bottom = 1379.0
+scale = Vector2(0.1, 0.1)
+icon = ExtResource("4_gj4ru")
+flat = true
+script = ExtResource("3_kqs3s")
+systemID = "3"
+
+[connection signal="pressed" from="StarBlue01" to="StarBlue01" method="_on_pressed"]
+[connection signal="pressed" from="StarRed01" to="StarRed01" method="_on_pressed"]
+[connection signal="pressed" from="StarYellow04" to="StarYellow04" method="_on_pressed"]

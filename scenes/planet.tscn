@@ -1,6 +1,5 @@
-[gd_scene load_steps=4 format=3 uid="uid://b574nj8gqhh65"]
+[gd_scene load_steps=3 format=3 uid="uid://c3044fs4ti5sg"]
 
-[ext_resource type="Texture2D" uid="uid://cv1tu5a2atgsm" path="res://assets/topdown/planets/planet1.png" id="1_4wfyc"]
 [ext_resource type="Script" path="res://scripts/Planet.gd" id="1_vvhrp"]
 
 [sub_resource type="CircleShape2D" id="CircleShape2D_jh16p"]
@@ -11,7 +10,6 @@ script = ExtResource("1_vvhrp")
 
 [node name="Sprite2D" type="Sprite2D" parent="."]
 scale = Vector2(2, 2)
-texture = ExtResource("1_4wfyc")
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
 shape = SubResource("CircleShape2D_jh16p")

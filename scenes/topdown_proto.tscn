@@ -1,4 +1,4 @@
-[gd_scene load_steps=11 format=3 uid="uid://d38hr800vi51v"]
+[gd_scene load_steps=14 format=3 uid="uid://67lelf5ce13g"]
 
 [ext_resource type="Texture2D" uid="uid://cgrr26kfqa65a" path="res://assets/topdown/parallax_bg/BackdropBlackLittleSparkBlack.png" id="1_j224e"]
 [ext_resource type="Script" path="res://scripts/PlayerPhysics.gd" id="1_lh0g6"]
@@ -7,73 +7,65 @@
 [ext_resource type="Texture2D" uid="uid://3pvfvk44r0pj" path="res://assets/topdown/parallax_bg/Parallax80.png" id="3_jrtko"]
 [ext_resource type="Texture2D" uid="uid://cg5hor68ty4iw" path="res://assets/topdown/parallax_bg/Parallax60.png" id="4_1ejo1"]
 [ext_resource type="Texture2D" uid="uid://bk0bpb2ltdg8y" path="res://assets/topdown/fighter_td.png" id="6_1djxu"]
-[ext_resource type="Script" path="res://scenes/DronePhysics.gd" id="7_4mlaa"]
+[ext_resource type="Texture2D" uid="uid://cv1tu5a2atgsm" path="res://planets/alpha/sprite_solarsystem.png" id="6_rj6pu"]
+[ext_resource type="Script" path="res://scripts/DronePhysics.gd" id="7_4mlaa"]
+[ext_resource type="Texture2D" uid="uid://jpba4r5xuwll" path="res://planets/beta/sprite_solarsystem.png" id="7_ymruq"]
 [ext_resource type="Texture2D" uid="uid://wsxgt288odn8" path="res://assets/topdown/Bomber2B.png" id="8_ofwqv"]
-[ext_resource type="PackedScene" uid="uid://b08lypesed6g4" path="res://scenes/planet.tscn" id="10_y8gml"]
+[ext_resource type="Texture2D" uid="uid://btd73midastxg" path="res://planets/gamma/sprite_solarsystem.png" id="8_xxtn1"]
+[ext_resource type="PackedScene" uid="uid://c3044fs4ti5sg" path="res://scenes/planet.tscn" id="10_y8gml"]
 
 [node name="topdown_proto" type="Node2D"]
 
-[node name="ParallaxBackground" type="ParallaxBackground" parent="."]
+[node name="SolarSystemEnv" type="Node" parent="."]
+
+[node name="ParallaxBackground" type="ParallaxBackground" parent="SolarSystemEnv"]
 follow_viewport_scale = 2.0
 scroll_ignore_camera_zoom = true
 
-[node name="Background" type="Sprite2D" parent="ParallaxBackground"]
+[node name="Background" type="Sprite2D" parent="SolarSystemEnv/ParallaxBackground"]
 texture = ExtResource("1_j224e")
 centered = false
 
-[node name="far" type="ParallaxLayer" parent="ParallaxBackground"]
-visible = false
+[node name="far" type="ParallaxLayer" parent="SolarSystemEnv/ParallaxBackground"]
 motion_scale = Vector2(0.05, 0.05)
 motion_mirroring = Vector2(2048, 2048)
 
-[node name="SpaceFar" type="Sprite2D" parent="ParallaxBackground/far"]
-visible = false
+[node name="SpaceFar" type="Sprite2D" parent="SolarSystemEnv/ParallaxBackground/far"]
 texture = ExtResource("2_j7xwi")
 centered = false
 
-[node name="mid" type="ParallaxLayer" parent="ParallaxBackground"]
+[node name="mid" type="ParallaxLayer" parent="SolarSystemEnv/ParallaxBackground"]
 motion_scale = Vector2(0.1, 0.1)
 motion_mirroring = Vector2(2048, 2048)
 
-[node name="SpaceMid" type="Sprite2D" parent="ParallaxBackground/mid"]
+[node name="SpaceMid" type="Sprite2D" parent="SolarSystemEnv/ParallaxBackground/mid"]
 texture = ExtResource("3_jrtko")
 centered = false
 
-[node name="close" type="ParallaxLayer" parent="ParallaxBackground"]
-visible = false
+[node name="close" type="ParallaxLayer" parent="SolarSystemEnv/ParallaxBackground"]
+z_index = 1
 motion_scale = Vector2(0.2, 0.2)
 motion_mirroring = Vector2(2048, 2048)
 
-[node name="SpaceClose" type="Sprite2D" parent="ParallaxBackground/close"]
-visible = false
+[node name="SpaceClose" type="Sprite2D" parent="SolarSystemEnv/ParallaxBackground/close"]
+z_index = 1
 texture = ExtResource("4_1ejo1")
 centered = false
 
 [node name="PlanetAlpha" parent="." instance=ExtResource("10_y8gml")]
 position = Vector2(876, 265)
 planetID = "alpha"
+solar_system_tex = ExtResource("6_rj6pu")
 
 [node name="PlanetBeta" parent="." instance=ExtResource("10_y8gml")]
 position = Vector2(1603, 1038)
 planetID = "beta"
+solar_system_tex = ExtResource("7_ymruq")
 
-[node name="ParallaxForeground" type="ParallaxBackground" parent="."]
-follow_viewport_scale = 2.0
-scroll_ignore_camera_zoom = true
-
-[node name="close" type="ParallaxLayer" parent="ParallaxForeground"]
-motion_scale = Vector2(0.2, 0.2)
-motion_mirroring = Vector2(2048, 2048)
-
-[node name="SpaceClose" type="Sprite2D" parent="ParallaxForeground/close"]
-texture = ExtResource("4_1ejo1")
-centered = false
-
-[node name="PlayerCamera" type="Camera2D" parent="." node_paths=PackedStringArray("target")]
-position = Vector2(565, 7)
-limit_smoothed = true
-script = ExtResource("3_ifnd0")
-target = NodePath("../WorldObjects/PlayerShip")
+[node name="PlanetGamma" parent="." instance=ExtResource("10_y8gml")]
+position = Vector2(690, 1380)
+planetID = "gamma"
+solar_system_tex = ExtResource("8_xxtn1")
 
 [node name="WorldObjects" type="Node" parent="."]
 
@@ -112,7 +104,15 @@ polygon = PackedVector2Array(-2.00006, -12, -10, -4, -13.9999, 10, 14.0001, 9.99
 scale = Vector2(0.5, 0.5)
 texture = ExtResource("8_ofwqv")
 
+[node name="PlayerCamera" type="Camera2D" parent="WorldObjects" node_paths=PackedStringArray("target")]
+position = Vector2(565, 7)
+limit_smoothed = true
+script = ExtResource("3_ifnd0")
+target = NodePath("../PlayerShip")
+
 [connection signal="body_entered" from="PlanetAlpha" to="PlanetAlpha" method="_on_body_entered"]
 [connection signal="body_exited" from="PlanetAlpha" to="PlanetAlpha" method="_on_body_exited"]
 [connection signal="body_entered" from="PlanetBeta" to="PlanetBeta" method="_on_body_entered"]
 [connection signal="body_exited" from="PlanetBeta" to="PlanetBeta" method="_on_body_exited"]
+[connection signal="body_entered" from="PlanetGamma" to="PlanetGamma" method="_on_body_entered"]
+[connection signal="body_exited" from="PlanetGamma" to="PlanetGamma" method="_on_body_exited"]
