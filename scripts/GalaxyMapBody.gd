@@ -4,4 +4,5 @@ extends Button
 
 func _on_pressed():
 	var system_scene_path = "res://scenes/solarsystem_" + systemID + ".tscn"
+	PlayerState.warping_in = true
 	get_tree().change_scene_to_file(system_scene_path)

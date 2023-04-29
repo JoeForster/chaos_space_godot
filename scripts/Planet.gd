@@ -31,5 +31,9 @@ func _process(delta):
 		# TODO: Need to make async and fix potential multi-overlap with a central manager.
 		if Input.is_action_just_released("use"):
 			if landing > 0:
+				PlayerState.current_system = get_tree().current_scene.name
+				PlayerState.system_pos = position
+				PlayerState.system_pos_set = true
 				var planet_scene_path = "res://planets/" + planetID + "/surface.tscn"
 				get_tree().change_scene_to_file(planet_scene_path)
+				

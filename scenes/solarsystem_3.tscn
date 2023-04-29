@@ -1,17 +1,16 @@
-[gd_scene load_steps=11 format=3 uid="uid://c3l5naye38yps"]
+[gd_scene load_steps=10 format=3 uid="uid://c3l5naye38yps"]
 
 [ext_resource type="Texture2D" uid="uid://cgrr26kfqa65a" path="res://assets/topdown/parallax_bg/BackdropBlackLittleSparkBlack.png" id="1_68uxn"]
 [ext_resource type="Texture2D" uid="uid://qm6d87pa4e8m" path="res://assets/topdown/parallax_bg/Parallax100.png" id="2_4hx0p"]
 [ext_resource type="Texture2D" uid="uid://3pvfvk44r0pj" path="res://assets/topdown/parallax_bg/Parallax80.png" id="3_l55fp"]
 [ext_resource type="Texture2D" uid="uid://cg5hor68ty4iw" path="res://assets/topdown/parallax_bg/Parallax60.png" id="4_rth6c"]
+[ext_resource type="PackedScene" uid="uid://b84geh14xyf6u" path="res://scenes/player_ship_system.tscn" id="8_yuv2e"]
 [ext_resource type="Script" path="res://scripts/PlayerCamera.gd" id="9_0plvu"]
-[ext_resource type="Script" path="res://scripts/PlayerPhysics.gd" id="10_dsny1"]
 [ext_resource type="PackedScene" uid="uid://ccqcds4nkn5cm" path="res://scenes/warp_point.tscn" id="10_ybva3"]
-[ext_resource type="Texture2D" uid="uid://bk0bpb2ltdg8y" path="res://assets/topdown/fighter_td.png" id="11_on3nb"]
 [ext_resource type="Script" path="res://scripts/DronePhysics.gd" id="12_ylqpf"]
 [ext_resource type="Texture2D" uid="uid://wsxgt288odn8" path="res://assets/topdown/Bomber2B.png" id="13_fw7ut"]
 
-[node name="topdown_proto" type="Node2D"]
+[node name="solarsystem_3" type="Node2D"]
 
 [node name="ParallaxBackground" type="ParallaxBackground" parent="."]
 follow_viewport_scale = 2.0
@@ -65,44 +64,25 @@ centered = false
 position = Vector2(565, 7)
 limit_smoothed = true
 script = ExtResource("9_0plvu")
-target = NodePath("../WorldObjects/PlayerShip")
+target = NodePath("../PlayerShip")
 
-[node name="WorldObjects" type="Node" parent="."]
-
-[node name="PlayerShip" type="RigidBody2D" parent="WorldObjects" groups=["PlayerShip"]]
-position = Vector2(457, 165)
-gravity_scale = 0.0
-angular_damp = 5.0
-script = ExtResource("10_dsny1")
-input_type = 3
-max_speed = 100
-max_torque = 4000
-metadata/_edit_group_ = true
-
-[node name="PlayerCollision" type="CollisionPolygon2D" parent="WorldObjects/PlayerShip"]
-rotation = 1.5708
-scale = Vector2(0.5, 0.5)
-polygon = PackedVector2Array(-32, -25, -40, -56, -50, -25, -51, 15, -60, 50, -48, 56, -38, 41, -25, 46, 25, 46, 39, 42, 48, 56, 60, 50, 51, 15, 50, -25, 40, -56, 32, -25, 0, -38)
-
-[node name="PlayerSprite2D" type="Sprite2D" parent="WorldObjects/PlayerShip"]
-scale = Vector2(0.5, 0.5)
-texture = ExtResource("11_on3nb")
-
-[node name="EnemyTest" type="RigidBody2D" parent="WorldObjects"]
+[node name="EnemyTest" type="RigidBody2D" parent="."]
 position = Vector2(774, 259)
 gravity_scale = 0.0
 angular_damp = 5.0
 script = ExtResource("12_ylqpf")
 metadata/_edit_group_ = true
 
-[node name="VesselCollision" type="CollisionPolygon2D" parent="WorldObjects/EnemyTest"]
+[node name="VesselCollision" type="CollisionPolygon2D" parent="EnemyTest"]
 rotation = 1.5708
 scale = Vector2(0.5, 0.5)
 polygon = PackedVector2Array(-2.00006, -12, -10, -4, -13.9999, 10, 14.0001, 9.99988, 10, -4.00012)
 
-[node name="VesselSprite2D" type="Sprite2D" parent="WorldObjects/EnemyTest"]
+[node name="VesselSprite2D" type="Sprite2D" parent="EnemyTest"]
 scale = Vector2(0.5, 0.5)
 texture = ExtResource("13_fw7ut")
+
+[node name="PlayerShip" parent="." instance=ExtResource("8_yuv2e")]
 
 [node name="WarpPoint" parent="." instance=ExtResource("10_ybva3")]
 position = Vector2(171, 134)

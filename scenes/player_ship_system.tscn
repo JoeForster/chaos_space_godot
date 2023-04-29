@@ -1,0 +1,22 @@
+[gd_scene load_steps=3 format=3 uid="uid://b84geh14xyf6u"]
+
+[ext_resource type="Script" path="res://scripts/PlayerPhysics.gd" id="1_ytqfs"]
+[ext_resource type="Texture2D" uid="uid://bk0bpb2ltdg8y" path="res://assets/topdown/fighter_td.png" id="2_uv48g"]
+
+[node name="PlayerShip" type="RigidBody2D" groups=["PlayerShip"]]
+gravity_scale = 0.0
+angular_damp = 5.0
+script = ExtResource("1_ytqfs")
+input_type = 3
+max_speed = 100
+max_torque = 4000
+metadata/_edit_group_ = true
+
+[node name="PlayerCollision" type="CollisionPolygon2D" parent="."]
+rotation = 1.5708
+scale = Vector2(0.5, 0.5)
+polygon = PackedVector2Array(-32, -25, -40, -56, -50, -25, -51, 15, -60, 50, -48, 56, -38, 41, -25, 46, 25, 46, 39, 42, 48, 56, 60, 50, 51, 15, 50, -25, 40, -56, 32, -25, 0, -38)
+
+[node name="PlayerSprite2D" type="Sprite2D" parent="."]
+scale = Vector2(0.5, 0.5)
+texture = ExtResource("2_uv48g")

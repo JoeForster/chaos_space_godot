@@ -1,4 +1,4 @@
-[gd_scene load_steps=15 format=3 uid="uid://gto4xmkyt3ox"]
+[gd_scene load_steps=13 format=3 uid="uid://gto4xmkyt3ox"]
 
 [ext_resource type="Texture2D" uid="uid://cgrr26kfqa65a" path="res://assets/topdown/parallax_bg/BackdropBlackLittleSparkBlack.png" id="1_vj22l"]
 [ext_resource type="Texture2D" uid="uid://qm6d87pa4e8m" path="res://assets/topdown/parallax_bg/Parallax100.png" id="2_qqvsj"]
@@ -7,15 +7,13 @@
 [ext_resource type="PackedScene" uid="uid://c3044fs4ti5sg" path="res://scenes/planet.tscn" id="5_c38jq"]
 [ext_resource type="Texture2D" uid="uid://cv1tu5a2atgsm" path="res://planets/alpha/sprite_solarsystem.png" id="6_38jrh"]
 [ext_resource type="Texture2D" uid="uid://jpba4r5xuwll" path="res://planets/beta/sprite_solarsystem.png" id="7_def4x"]
-[ext_resource type="Texture2D" uid="uid://btd73midastxg" path="res://planets/gamma/sprite_solarsystem.png" id="8_hkqtr"]
 [ext_resource type="Script" path="res://scripts/PlayerCamera.gd" id="9_odwpc"]
 [ext_resource type="PackedScene" uid="uid://ccqcds4nkn5cm" path="res://scenes/warp_point.tscn" id="9_q4cta"]
-[ext_resource type="Script" path="res://scripts/PlayerPhysics.gd" id="10_4mpoh"]
-[ext_resource type="Texture2D" uid="uid://bk0bpb2ltdg8y" path="res://assets/topdown/fighter_td.png" id="11_tlttr"]
+[ext_resource type="PackedScene" uid="uid://b84geh14xyf6u" path="res://scenes/player_ship_system.tscn" id="10_qkj87"]
 [ext_resource type="Script" path="res://scripts/DronePhysics.gd" id="12_dby25"]
 [ext_resource type="Texture2D" uid="uid://wsxgt288odn8" path="res://assets/topdown/Bomber2B.png" id="13_2oamo"]
 
-[node name="topdown_proto" type="Node2D"]
+[node name="solarsystem_1" type="Node2D"]
 
 [node name="ParallaxBackground" type="ParallaxBackground" parent="."]
 follow_viewport_scale = 2.0
@@ -59,14 +57,9 @@ planetID = "alpha"
 solar_system_tex = ExtResource("6_38jrh")
 
 [node name="PlanetBeta" parent="." instance=ExtResource("5_c38jq")]
-position = Vector2(1603, 1038)
+position = Vector2(1463, 1364)
 planetID = "beta"
 solar_system_tex = ExtResource("7_def4x")
-
-[node name="PlanetGamma" parent="." instance=ExtResource("5_c38jq")]
-position = Vector2(690, 1380)
-planetID = "gamma"
-solar_system_tex = ExtResource("8_hkqtr")
 
 [node name="WarpPoint" parent="." instance=ExtResource("9_q4cta")]
 position = Vector2(269, 191)
@@ -75,42 +68,23 @@ position = Vector2(269, 191)
 position = Vector2(565, 7)
 limit_smoothed = true
 script = ExtResource("9_odwpc")
-target = NodePath("../WorldObjects/PlayerShip")
+target = NodePath("../PlayerShip")
 
-[node name="WorldObjects" type="Node" parent="."]
+[node name="PlayerShip" parent="." instance=ExtResource("10_qkj87")]
 
-[node name="PlayerShip" type="RigidBody2D" parent="WorldObjects" groups=["PlayerShip"]]
-position = Vector2(457, 165)
-gravity_scale = 0.0
-angular_damp = 5.0
-script = ExtResource("10_4mpoh")
-input_type = 3
-max_speed = 100
-max_torque = 4000
-metadata/_edit_group_ = true
-
-[node name="PlayerCollision" type="CollisionPolygon2D" parent="WorldObjects/PlayerShip"]
-rotation = 1.5708
-scale = Vector2(0.5, 0.5)
-polygon = PackedVector2Array(-32, -25, -40, -56, -50, -25, -51, 15, -60, 50, -48, 56, -38, 41, -25, 46, 25, 46, 39, 42, 48, 56, 60, 50, 51, 15, 50, -25, 40, -56, 32, -25, 0, -38)
-
-[node name="PlayerSprite2D" type="Sprite2D" parent="WorldObjects/PlayerShip"]
-scale = Vector2(0.5, 0.5)
-texture = ExtResource("11_tlttr")
-
-[node name="EnemyTest" type="RigidBody2D" parent="WorldObjects"]
+[node name="EnemyTest" type="RigidBody2D" parent="."]
 position = Vector2(774, 259)
 gravity_scale = 0.0
 angular_damp = 5.0
 script = ExtResource("12_dby25")
 metadata/_edit_group_ = true
 
-[node name="VesselCollision" type="CollisionPolygon2D" parent="WorldObjects/EnemyTest"]
+[node name="VesselCollision" type="CollisionPolygon2D" parent="EnemyTest"]
 rotation = 1.5708
 scale = Vector2(0.5, 0.5)
 polygon = PackedVector2Array(-2.00006, -12, -10, -4, -13.9999, 10, 14.0001, 9.99988, 10, -4.00012)
 
-[node name="VesselSprite2D" type="Sprite2D" parent="WorldObjects/EnemyTest"]
+[node name="VesselSprite2D" type="Sprite2D" parent="EnemyTest"]
 scale = Vector2(0.5, 0.5)
 texture = ExtResource("13_2oamo")
 
@@ -118,5 +92,3 @@ texture = ExtResource("13_2oamo")
 [connection signal="body_exited" from="PlanetAlpha" to="PlanetAlpha" method="_on_body_exited"]
 [connection signal="body_entered" from="PlanetBeta" to="PlanetBeta" method="_on_body_entered"]
 [connection signal="body_exited" from="PlanetBeta" to="PlanetBeta" method="_on_body_exited"]
-[connection signal="body_entered" from="PlanetGamma" to="PlanetGamma" method="_on_body_entered"]
-[connection signal="body_exited" from="PlanetGamma" to="PlanetGamma" method="_on_body_exited"]

@@ -82,6 +82,7 @@ func _physics_process_top_down(delta):
 	linear_damp = brake_damp if braking else default_linear_damp
 		
 	apply_torque(input_directional.x * max_torque)
+	print(input_directional.x * max_torque)
 
 func _keep_in_bounds():
 	if world_bounds != null:
@@ -91,8 +92,12 @@ func _keep_in_bounds():
 
 # Called every physics update
 func _physics_process(delta):
-		
-	#print("POS IS NOW %f, %f" % [position.x, position.y])
+	# On returning from a planet or galaxy map, place the ship in the correct saved position
+	# TODO make less hack
+	var current_scene = get_tree().current_scene.name
+	if PlayerState.system_pos_set && current_scene.contains("solarsystem_"):
+		position = PlayerState.system_pos
+		PlayerState.system_pos_set = false
 	
 	if input_type == INPUT_TYPE.KINEMATIC:
 		_physics_process_kinematic(delta)
@@ -105,29 +110,6 @@ func _physics_process(delta):
 	
 	linear_velocity.limit_length(max_speed)
 	
-func _integrate_forces(state):
-	# On returning from a planet or galaxy map, place the ship in the correct warp/planet position
-	# TODO is there a less hacky way to do this? Probably create/spawn the ship on scene change rather than moving.
-	var current_scene = get_tree().current_scene.name
-	if current_scene.contains("solarsystem_"):
-		var spawn_pos = null
-		if PlayerState.system_pos_set:
-			spawn_pos = PlayerState.system_pos
-			PlayerState.system_pos_set = false
-			
-		if PlayerState.warping_in:
-			var warp_point = get_node("../WarpPoint")
-			if warp_point != null:
-				spawn_pos = warp_point.position				
-
-			PlayerState.warping_in = false
-			
-		if spawn_pos != null:
-			var t = state.get_transform()
-			t.origin.x = spawn_pos.x
-			t.origin.y = spawn_pos.y
-			state.set_transform(t)
-
 func _process(delta):
 	# Logical update: take inputs and process
 	input_directional = Vector2.ZERO
