@@ -3,15 +3,15 @@
 extends Area2D
 
 @export var planetID : String
-@export var solar_system_tex : Texture2D
+@export var planet_system_anim : SpriteFrames
 
 # TODO combine with Planet.gd!
 var landing = 0
 
 func _enter_tree():
-	##if Engine.is_editor_hint():
-	# TODO is there a better way?
-	$Sprite2D.set_texture(solar_system_tex)
+	# Do data-driven scene setup for this object in the solar system scene
+	$AnimSprite2D.set_sprite_frames(planet_system_anim)
+	$AnimSprite2D.play()
 
 func _on_body_entered(body):
 	if not Engine.is_editor_hint():

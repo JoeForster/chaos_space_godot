@@ -1,4 +1,4 @@
-[gd_scene load_steps=30 format=3]
+[gd_scene load_steps=30 format=3 uid="uid://bt15v2fgqyy6y"]
 
 [ext_resource type="Texture2D" uid="uid://cg5a5o4iewhii" path="res://assets/sidescroller/parallax_bg/parallax-mountain-bg-1280.png" id="1_n538s"]
 [ext_resource type="Texture2D" uid="uid://opinqxrvd1yg" path="res://assets/sidescroller/parallax_bg/parallax-mountain-montain-far-1280.png" id="2_amig0"]

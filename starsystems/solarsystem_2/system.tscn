@@ -5,7 +5,7 @@
 [ext_resource type="Texture2D" uid="uid://3pvfvk44r0pj" path="res://assets/topdown/parallax_bg/Parallax80.png" id="3_2lver"]
 [ext_resource type="Texture2D" uid="uid://cg5hor68ty4iw" path="res://assets/topdown/parallax_bg/Parallax60.png" id="4_3x114"]
 [ext_resource type="PackedScene" uid="uid://c3044fs4ti5sg" path="res://scenes/planet.tscn" id="6_g8rwt"]
-[ext_resource type="Texture2D" uid="uid://btd73midastxg" path="res://planets/gamma/sprite_solarsystem.png" id="7_37xbj"]
+[ext_resource type="SpriteFrames" uid="uid://btmv5n1fpfeu3" path="res://planets/gamma/sprite_frames.tres" id="7_ifgcj"]
 [ext_resource type="PackedScene" uid="uid://b84geh14xyf6u" path="res://scenes/player_ship_system.tscn" id="8_df8o8"]
 [ext_resource type="Script" path="res://scripts/PlayerCamera.gd" id="9_7ny4n"]
 [ext_resource type="PackedScene" uid="uid://ccqcds4nkn5cm" path="res://scenes/warp_point.tscn" id="10_hx0jn"]
@@ -65,7 +65,7 @@ centered = false
 [node name="PlanetGamma" parent="." instance=ExtResource("6_g8rwt")]
 position = Vector2(1108, 1093)
 planetID = "gamma"
-solar_system_tex = ExtResource("7_37xbj")
+planet_system_anim = ExtResource("7_ifgcj")
 
 [node name="PlayerCamera" type="Camera2D" parent="." node_paths=PackedStringArray("target")]
 position = Vector2(565, 7)

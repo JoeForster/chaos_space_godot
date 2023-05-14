@@ -5,8 +5,8 @@
 [ext_resource type="Texture2D" uid="uid://3pvfvk44r0pj" path="res://assets/topdown/parallax_bg/Parallax80.png" id="3_123nc"]
 [ext_resource type="Texture2D" uid="uid://cg5hor68ty4iw" path="res://assets/topdown/parallax_bg/Parallax60.png" id="4_83d7y"]
 [ext_resource type="PackedScene" uid="uid://c3044fs4ti5sg" path="res://scenes/planet.tscn" id="5_c38jq"]
-[ext_resource type="Texture2D" uid="uid://cv1tu5a2atgsm" path="res://planets/alpha/sprite_solarsystem.png" id="6_38jrh"]
-[ext_resource type="Texture2D" uid="uid://jpba4r5xuwll" path="res://planets/beta/sprite_solarsystem.png" id="7_def4x"]
+[ext_resource type="SpriteFrames" uid="uid://dk86tmw5g60wo" path="res://planets/alpha/sprite_frames.tres" id="7_di51x"]
+[ext_resource type="SpriteFrames" uid="uid://cuao12qqxhe1h" path="res://planets/beta/sprite_frames.tres" id="9_dv50n"]
 [ext_resource type="Script" path="res://scripts/PlayerCamera.gd" id="9_odwpc"]
 [ext_resource type="PackedScene" uid="uid://ccqcds4nkn5cm" path="res://scenes/warp_point.tscn" id="9_q4cta"]
 [ext_resource type="PackedScene" uid="uid://b84geh14xyf6u" path="res://scenes/player_ship_system.tscn" id="10_qkj87"]
@@ -54,12 +54,12 @@ centered = false
 [node name="PlanetAlpha" parent="." instance=ExtResource("5_c38jq")]
 position = Vector2(876, 265)
 planetID = "alpha"
-solar_system_tex = ExtResource("6_38jrh")
+planet_system_anim = ExtResource("7_di51x")
 
 [node name="PlanetBeta" parent="." instance=ExtResource("5_c38jq")]
 position = Vector2(1463, 1364)
 planetID = "beta"
-solar_system_tex = ExtResource("7_def4x")
+planet_system_anim = ExtResource("9_dv50n")
 
 [node name="WarpPoint" parent="." instance=ExtResource("9_q4cta")]
 position = Vector2(269, 191)
