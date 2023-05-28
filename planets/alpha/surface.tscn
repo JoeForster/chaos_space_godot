@@ -1,4 +1,4 @@
-[gd_scene load_steps=30 format=3 uid="uid://bt15v2fgqyy6y"]
+[gd_scene load_steps=31 format=3 uid="uid://bt15v2fgqyy6y"]
 
 [ext_resource type="Texture2D" uid="uid://cg5a5o4iewhii" path="res://assets/sidescroller/parallax_bg/parallax-mountain-bg-1280.png" id="1_n538s"]
 [ext_resource type="Texture2D" uid="uid://opinqxrvd1yg" path="res://assets/sidescroller/parallax_bg/parallax-mountain-montain-far-1280.png" id="2_amig0"]
@@ -9,9 +9,10 @@
 [ext_resource type="Script" path="res://scripts/Robot.gd" id="7_5xpqw"]
 [ext_resource type="Shape2D" uid="uid://cwlt877pcdoo1" path="res://assets/robot_capsule_shape_2d.tres" id="8_egwf2"]
 [ext_resource type="Texture2D" uid="uid://bkb0i5k767dt7" path="res://assets/sidescroller/robot-spritesheet-transparent.png" id="9_4db8t"]
-[ext_resource type="Script" path="res://scripts/PlayerPhysics.gd" id="10_i24d4"]
-[ext_resource type="Texture2D" uid="uid://biw0lmf7oxf1x" path="res://assets/sidescroller/fighter_lr.png" id="11_rjofv"]
+[ext_resource type="Script" path="res://scripts/PlayerControls.gd" id="11_0sdvr"]
 [ext_resource type="Script" path="res://scripts/PlayerCamera.gd" id="12_ilv2j"]
+[ext_resource type="PackedScene" uid="uid://dm1h2mdxt7dqy" path="res://scenes/player_ship.tscn" id="12_ql4l8"]
+[ext_resource type="PackedScene" uid="uid://kuhecnpwdfnh" path="res://scenes/player_mech.tscn" id="13_f2hv2"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_5f4aw"]
 size = Vector2(5120, 720)
@@ -179,7 +180,7 @@ centered = false
 [node name="World" type="Area2D" parent="."]
 
 [node name="WorldBounds" type="CollisionShape2D" parent="World"]
-position = Vector2(1000, 400)
+position = Vector2(1002, 398)
 shape = SubResource("RectangleShape2D_5f4aw")
 
 [node name="GroundTiled" type="Node2D" parent="World"]
@@ -261,7 +262,7 @@ scale = Vector2(32, 48)
 shape = SubResource("RectangleShape2D_6bd5g")
 
 [node name="Robot" type="CharacterBody2D" parent="World"]
-position = Vector2(361, 100)
+position = Vector2(1262, 258)
 script = ExtResource("7_5xpqw")
 metadata/_edit_group_ = true
 
@@ -277,24 +278,15 @@ animation = &"idle"
 [node name="MainCollisionShape2" type="CollisionShape2D" parent="World/Robot/FallTest"]
 shape = ExtResource("8_egwf2")
 
-[node name="PlayerShip" type="RigidBody2D" parent="." node_paths=PackedStringArray("world_bounds")]
-position = Vector2(457, 165)
-gravity_scale = 0.0
-linear_damp = 0.99
-script = ExtResource("10_i24d4")
-input_type = 1
-world_bounds = NodePath("../World/WorldBounds")
-metadata/_edit_group_ = true
-
-[node name="PlayerSprite2D" type="Sprite2D" parent="PlayerShip"]
-texture = ExtResource("11_rjofv")
-
-[node name="PlayerCollision" type="CollisionPolygon2D" parent="PlayerShip"]
-polygon = PackedVector2Array(-2, -25, 28, -14, 29, -12, 50, -3, 55, 9, 54, 12, 60, 13, 61, 20, 59, 23, 41, 21, 38, 23, 17, 22, 11, 20, -6, 28, -44, 27, -49, 6, -44, 4, -60, -12, -39, -10, -31, -3, -21, -10, -21, -16, -10, -27)
-
 [node name="PlayerCamera" type="Camera2D" parent="." node_paths=PackedStringArray("target")]
 position = Vector2(565, 7)
 limit_left = 0
 limit_top = 0
 script = ExtResource("12_ilv2j")
-target = NodePath("../PlayerShip")
+target = NodePath("../Player")
+
+[node name="Player" type="Node" parent="."]
+script = ExtResource("11_0sdvr")
+current_mode = 1
+ship_scene = ExtResource("12_ql4l8")
+mech_scene = ExtResource("13_f2hv2")

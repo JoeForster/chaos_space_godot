@@ -14,6 +14,7 @@ var input_throttle = 0.0
 var input_directional = Vector2.ZERO
 var braking = false
 var default_linear_damp : float
+var move
 
 # Called when the node enters the scene tree for the first time.
 func _ready():
@@ -154,4 +155,7 @@ func _process(delta):
 		if !current_scene.contains("solarsystem_"):
 			get_tree().change_scene_to_file("res://scenes/"+PlayerState.current_system+".tscn")
 			
-		
+	
+	# TODO switch activated node between the rigidbody and character thingy	
+	#if Input.is_action_just_released("ability"):
+			

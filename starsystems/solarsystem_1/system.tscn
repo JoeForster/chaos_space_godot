@@ -1,4 +1,4 @@
-[gd_scene load_steps=13 format=3 uid="uid://gto4xmkyt3ox"]
+[gd_scene load_steps=16 format=3 uid="uid://gto4xmkyt3ox"]
 
 [ext_resource type="Texture2D" uid="uid://cgrr26kfqa65a" path="res://assets/topdown/parallax_bg/BackdropBlackLittleSparkBlack.png" id="1_vj22l"]
 [ext_resource type="Texture2D" uid="uid://qm6d87pa4e8m" path="res://assets/topdown/parallax_bg/Parallax100.png" id="2_qqvsj"]
@@ -12,6 +12,14 @@
 [ext_resource type="PackedScene" uid="uid://b84geh14xyf6u" path="res://scenes/player_ship_system.tscn" id="10_qkj87"]
 [ext_resource type="Script" path="res://scripts/DronePhysics.gd" id="12_dby25"]
 [ext_resource type="Texture2D" uid="uid://wsxgt288odn8" path="res://assets/topdown/Bomber2B.png" id="13_2oamo"]
+[ext_resource type="Script" path="res://starsystems/solarsystem_1/HunterEnemy.gd" id="13_nkwt7"]
+[ext_resource type="Texture2D" uid="uid://bs41ft4m2yp3b" path="res://assets/topdown/entity_placeholder.png" id="13_x6mxm"]
+
+[sub_resource type="Curve2D" id="Curve2D_668rs"]
+_data = {
+"points": PackedVector2Array(-183.543, 65.1764, 183.543, -65.1764, 730, 750, -53.9391, -38.956, 53.9391, 38.956, 1010, 794, -7.49154, -120.614, 7.49154, 120.614, 1185, 991, 236.733, 17.2305, -236.733, -17.2305, 856, 1376, 16.4814, 117.617, -16.4814, -117.617, 363, 1182, -60.6814, 76.4137, 60.6814, -76.4137, 455, 893, 0, 0, 0, 0, 730, 750)
+}
+point_count = 7
 
 [node name="solarsystem_1" type="Node2D"]
 
@@ -72,21 +80,41 @@ target = NodePath("../PlayerShip")
 
 [node name="PlayerShip" parent="." instance=ExtResource("10_qkj87")]
 
-[node name="EnemyTest" type="RigidBody2D" parent="."]
-position = Vector2(774, 259)
+[node name="DroneTest" type="RigidBody2D" parent="."]
+position = Vector2(836, 300)
 gravity_scale = 0.0
 angular_damp = 5.0
 script = ExtResource("12_dby25")
 metadata/_edit_group_ = true
 
-[node name="VesselCollision" type="CollisionPolygon2D" parent="EnemyTest"]
+[node name="VesselCollision" type="CollisionPolygon2D" parent="DroneTest"]
 rotation = 1.5708
 scale = Vector2(0.5, 0.5)
 polygon = PackedVector2Array(-2.00006, -12, -10, -4, -13.9999, 10, 14.0001, 9.99988, 10, -4.00012)
 
-[node name="VesselSprite2D" type="Sprite2D" parent="EnemyTest"]
+[node name="VesselSprite2D" type="Sprite2D" parent="DroneTest"]
 scale = Vector2(0.5, 0.5)
 texture = ExtResource("13_2oamo")
+
+[node name="CreatureTest" type="RigidBody2D" parent="."]
+position = Vector2(508, 445)
+gravity_scale = 0.0
+angular_damp = 5.0
+script = ExtResource("13_nkwt7")
+metadata/_edit_group_ = true
+
+[node name="VesselCollision" type="CollisionPolygon2D" parent="CreatureTest"]
+position = Vector2(3.46141, 1.56839)
+rotation = 1.5708
+scale = Vector2(1.04512, 1.02935)
+polygon = PackedVector2Array(10.938, -15.0955, -13.9394, -17.0384, -24.4644, 2.39133, -14.8961, 23.7639, 7.11084, 21.8208, 20.5063, 3.36264)
+
+[node name="VesselSprite2D" type="Sprite2D" parent="CreatureTest"]
+scale = Vector2(0.5, 0.5)
+texture = ExtResource("13_x6mxm")
+
+[node name="PatrolPath" type="Path2D" parent="."]
+curve = SubResource("Curve2D_668rs")
 
 [connection signal="body_entered" from="PlanetAlpha" to="PlanetAlpha" method="_on_body_entered"]
 [connection signal="body_exited" from="PlanetAlpha" to="PlanetAlpha" method="_on_body_exited"]
