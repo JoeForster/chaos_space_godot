@@ -5,7 +5,9 @@ enum PLAYER_MODE { SHIP, MECH }
 @export var current_mode = PLAYER_MODE.SHIP
 @export var ship_scene : Resource
 @export var mech_scene : Resource
-@export var vehicle_pos : Vector2
+@export var spawn_point : Node2D
+
+var vehicle_pos : Vector2
 
 func get_character_object():
 	if current_mode == PLAYER_MODE.SHIP:
@@ -37,6 +39,7 @@ func update_mode():
 			add_child(scene_instance)
 
 func _ready():
+	vehicle_pos = spawn_point.position	
 	update_mode()
 
 func _process(delta):
@@ -45,9 +48,10 @@ func _process(delta):
 	# TODO proper level transition manager; background
 	if Input.is_action_just_released("use"):
 		# todo make this less shit
-		var current_scene = get_tree().current_scene.name
-		if !current_scene.contains("solarsystem_"):
-			get_tree().change_scene_to_file("res://scenes/"+PlayerState.current_system+".tscn")
+		if PlayerState.current_system:
+			var current_scene = get_tree().current_scene.name
+			if !current_scene.contains("solarsystem_"):
+				get_tree().change_scene_to_file("res://scenes/"+PlayerState.current_system+".tscn")
 
 	elif Input.is_action_just_released("ability"):
 		if current_mode == PLAYER_MODE.SHIP:

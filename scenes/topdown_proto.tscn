@@ -1,4 +1,4 @@
-[gd_scene load_steps=14 format=3 uid="uid://c7fc2r0mre1tf"]
+[gd_scene load_steps=11 format=3 uid="uid://deb87n7ocjwmd"]
 
 [ext_resource type="Texture2D" uid="uid://cgrr26kfqa65a" path="res://assets/topdown/parallax_bg/BackdropBlackLittleSparkBlack.png" id="1_j224e"]
 [ext_resource type="Script" path="res://scripts/PlayerPhysics.gd" id="1_lh0g6"]
@@ -7,11 +7,8 @@
 [ext_resource type="Texture2D" uid="uid://3pvfvk44r0pj" path="res://assets/topdown/parallax_bg/Parallax80.png" id="3_jrtko"]
 [ext_resource type="Texture2D" uid="uid://cg5hor68ty4iw" path="res://assets/topdown/parallax_bg/Parallax60.png" id="4_1ejo1"]
 [ext_resource type="Texture2D" uid="uid://bk0bpb2ltdg8y" path="res://assets/topdown/fighter_td.png" id="6_1djxu"]
-[ext_resource type="Texture2D" uid="uid://cv1tu5a2atgsm" path="res://planets/alpha/sprite_solarsystem.png" id="6_rj6pu"]
 [ext_resource type="Script" path="res://scripts/DronePhysics.gd" id="7_4mlaa"]
-[ext_resource type="Texture2D" uid="uid://jpba4r5xuwll" path="res://planets/beta/sprite_solarsystem.png" id="7_ymruq"]
 [ext_resource type="Texture2D" uid="uid://wsxgt288odn8" path="res://assets/topdown/Bomber2B.png" id="8_ofwqv"]
-[ext_resource type="Texture2D" uid="uid://btd73midastxg" path="res://planets/gamma/sprite_solarsystem.png" id="8_xxtn1"]
 [ext_resource type="PackedScene" uid="uid://c3044fs4ti5sg" path="res://scenes/planet.tscn" id="10_y8gml"]
 
 [node name="topdown_proto" type="Node2D"]
@@ -55,17 +52,14 @@ centered = false
 [node name="PlanetAlpha" parent="." instance=ExtResource("10_y8gml")]
 position = Vector2(876, 265)
 planetID = "alpha"
-solar_system_tex = ExtResource("6_rj6pu")
 
 [node name="PlanetBeta" parent="." instance=ExtResource("10_y8gml")]
 position = Vector2(1603, 1038)
 planetID = "beta"
-solar_system_tex = ExtResource("7_ymruq")
 
 [node name="PlanetGamma" parent="." instance=ExtResource("10_y8gml")]
 position = Vector2(690, 1380)
 planetID = "gamma"
-solar_system_tex = ExtResource("8_xxtn1")
 
 [node name="WorldObjects" type="Node" parent="."]
 

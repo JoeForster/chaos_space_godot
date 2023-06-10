@@ -1,12 +1,13 @@
 extends RigidBody2D
 
-enum INPUT_TYPE { KINEMATIC, HORIZONTAL, THROTTLE, TOP_DOWN }
+enum INPUT_TYPE { KINEMATIC, HORIZONTAL_DIRECTIONAL, HORIZONTAL_THROTTLE, TOP_DOWN }
 
-@export var input_type = INPUT_TYPE.THROTTLE
+@export var input_type = INPUT_TYPE.HORIZONTAL_THROTTLE
 @export var throttle_per_sec = 1.0
 @export var max_speed = 400
 @export var max_thrust = 500
 @export var max_torque = 1000
+@export var fixed_rotation_rate = 2.0
 @export var world_bounds : CollisionShape2D
 @export var brake_damp = 0.995
 
@@ -14,7 +15,7 @@ var input_throttle = 0.0
 var input_directional = Vector2.ZERO
 var braking = false
 var default_linear_damp : float
-var move
+var hack_rotation = 0
 
 # Called when the node enters the scene tree for the first time.
 func _ready():
@@ -28,52 +29,94 @@ func _physics_process_kinematic(delta):
 
 	position += velocity * delta
 	
-func _physics_process_horizontal(delta):
-	# TODO we want to limit the angle somehow to prevent flipping, but this
-	# breaks the torque effect once beyond the angle
-	#if get_rotation_degrees() > 45:
-	#	set_rotation_degrees(45)
-	#if rotation_degrees < -45:
-	#	set_rotation_degrees(-45)	
+func _physics_process_horizontal_directional(delta):
+	# TODO: tidy up once we figure out the best mode for this
+	set_lock_rotation_enabled(true)
 	
-	var thrust_local = input_directional
-
-
-	if thrust_local.length() > 0:
-		var thrust_local_norm = thrust_local.normalized()
-		var global_thrust = transform.basis_xform(thrust_local_norm * max_thrust)
-		apply_force(global_thrust)
-		#apply_force(thrust_local * max_thrust)
-		$PlayerSprite2D.set_flip_h(thrust_local_norm.x < 0)
-
-	var facing_right = $PlayerSprite2D.is_flipped_h()
+	if input_directional.x > 0:
+		$PlayerSprite2D.set_flip_h(false)
+	elif input_directional.x < 0:
+		$PlayerSprite2D.set_flip_h(true)
 	
-	# Rotate towards horizontal
-	var rotation = get_rotation()
-	var rotation_threshold = max(0.01, abs(get_angular_velocity()) * delta * 2)
-	print(rotation_threshold)
-	if abs(rotation) < rotation_threshold:
-		set_angular_velocity(0)
-	elif rotation > 0:
-		print("torque up!")
-		apply_torque(-thrust_local.x * max_torque)
-	else:
-		print("torque down!")
-		apply_torque(-thrust_local.x * -max_torque)
-
-# TODO rename to be clear this is side-on
-func _physics_process_throttle(delta):
-	var facing_right = $PlayerSprite2D.is_flipped_h()
+	var facing_right = !$PlayerSprite2D.is_flipped_h()
 	var thrust_local = (Vector2.RIGHT if facing_right else Vector2.LEFT) * input_throttle
 	thrust_local *= max_thrust
 	
 	if thrust_local.length() > 0:
-		var global_thrust = transform.basis_xform(thrust_local)
-		apply_force(global_thrust)
-		
-	apply_torque(input_directional.y * max_torque)
+		if is_lock_rotation_enabled():
+			var global_thrust = thrust_local.rotated(hack_rotation)
+			apply_central_force(global_thrust)
+		else:
+			var global_thrust = transform.basis_xform(thrust_local)
+			apply_central_force(global_thrust)
+
+	#apply_torque(thrust_local.y * max_torque)
+	var target_rotation = asin(input_directional.y)
+	if facing_right:
+		target_rotation = -target_rotation
+	var cur_rotation = hack_rotation
+	var new_rotation = cur_rotation
+
+
+	var torque_tolerance = 1.0
+	if target_rotation > new_rotation:
+		new_rotation += fixed_rotation_rate * delta
+		if new_rotation > target_rotation:
+			new_rotation = target_rotation
+	elif target_rotation < new_rotation:
+		new_rotation -= fixed_rotation_rate * delta
+		if new_rotation < target_rotation:
+			new_rotation = target_rotation
+	print("target_rotation: %f rotation: %f -> %f" % [target_rotation, cur_rotation, new_rotation])
+	set_rotation(new_rotation)
+	hack_rotation = new_rotation
+
+func _physics_process_horizontal_throttle(delta):
+	# TODO: tidy up once we figure out the best mode for this
+	set_lock_rotation_enabled(true)
+	
+	if input_directional.x > 0:
+		$PlayerSprite2D.set_flip_h(false)
+	elif input_directional.x < 0:
+		$PlayerSprite2D.set_flip_h(true)
+	
+	var facing_right = !$PlayerSprite2D.is_flipped_h()
+	var thrust_local = (Vector2.RIGHT if facing_right else Vector2.LEFT) * input_throttle
+	thrust_local *= max_thrust
+	
+	if thrust_local.length() > 0:
+		if is_lock_rotation_enabled():
+			var global_thrust = thrust_local.rotated(hack_rotation)
+			apply_central_force(global_thrust)
+		else:
+			var global_thrust = transform.basis_xform(thrust_local)
+			apply_central_force(global_thrust)
+
+	#apply_torque(thrust_local.y * max_torque)
+	var target_rotation = asin(input_directional.y)
+	if facing_right:
+		target_rotation = -target_rotation
+	var cur_rotation = hack_rotation
+	var new_rotation = cur_rotation
+
+
+	var torque_tolerance = 1.0
+	if target_rotation > new_rotation:
+		new_rotation += fixed_rotation_rate * delta
+		if new_rotation > target_rotation:
+			new_rotation = target_rotation
+	elif target_rotation < new_rotation:
+		new_rotation -= fixed_rotation_rate * delta
+		if new_rotation < target_rotation:
+			new_rotation = target_rotation
+	print("target_rotation: %f rotation: %f -> %f" % [target_rotation, cur_rotation, new_rotation])
+	set_rotation(new_rotation)
+	hack_rotation = new_rotation
 
 func _physics_process_top_down(delta):
+	
+	set_lock_rotation_enabled(false)
+
 	var thrust_local = Vector2.RIGHT * input_throttle * max_thrust
 	
 	if thrust_local.length() > 0:
@@ -97,10 +140,10 @@ func _physics_process(delta):
 	
 	if input_type == INPUT_TYPE.KINEMATIC:
 		_physics_process_kinematic(delta)
-	elif input_type == INPUT_TYPE.HORIZONTAL:
-		_physics_process_horizontal(delta)
-	elif input_type == INPUT_TYPE.THROTTLE:
-		_physics_process_throttle(delta)
+	elif input_type == INPUT_TYPE.HORIZONTAL_DIRECTIONAL:
+		_physics_process_horizontal_directional(delta)
+	elif input_type == INPUT_TYPE.HORIZONTAL_THROTTLE:
+		_physics_process_horizontal_throttle(delta)
 	elif input_type == INPUT_TYPE.TOP_DOWN:
 		_physics_process_top_down(delta)
 	
@@ -132,14 +175,11 @@ func _integrate_forces(state):
 func _process(delta):
 	# Logical update: take inputs and process
 	input_directional = Vector2.ZERO
-	if Input.is_action_pressed("move_right"):
-		input_directional.x += 1
-	if Input.is_action_pressed("move_left"):
-		input_directional.x -= 1
-	if Input.is_action_pressed("move_down"):
-		input_directional.y += 1
-	if Input.is_action_pressed("move_up"):
-		input_directional.y -= 1
+	input_directional.x += Input.get_action_strength("move_right")
+	input_directional.x -= Input.get_action_strength("move_left")
+	input_directional.y += Input.get_action_strength("move_up")
+	input_directional.y -= Input.get_action_strength("move_down")
+
 	if Input.is_action_pressed("throttle_up"):
 		input_throttle = min(1.0, input_throttle + delta * throttle_per_sec)
 	if Input.is_action_pressed("throttle_down"):

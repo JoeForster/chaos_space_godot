@@ -3,11 +3,11 @@ extends Area2D
 var landing = 0
 
 func _on_body_entered(body):
-	if body.is_in_group("PlayerShip"):
+	if body.is_in_group("player"):
 		landing = landing + 1
 
 func _on_body_exited(body):
-	if body.is_in_group("PlayerShip"):
+	if body.is_in_group("player"):
 		landing = landing - 1
 		assert(landing >= 0)
 

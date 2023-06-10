@@ -11,7 +11,7 @@
 [ext_resource type="Texture2D" uid="uid://bkb0i5k767dt7" path="res://assets/sidescroller/robot-spritesheet-transparent.png" id="9_4db8t"]
 [ext_resource type="Script" path="res://scripts/PlayerControls.gd" id="11_0sdvr"]
 [ext_resource type="Script" path="res://scripts/PlayerCamera.gd" id="12_ilv2j"]
-[ext_resource type="PackedScene" uid="uid://dm1h2mdxt7dqy" path="res://scenes/player_ship.tscn" id="12_ql4l8"]
+[ext_resource type="PackedScene" uid="uid://0gcnvxo01amn" path="res://scenes/player_ship.tscn" id="12_ql4l8"]
 [ext_resource type="PackedScene" uid="uid://kuhecnpwdfnh" path="res://scenes/player_mech.tscn" id="13_f2hv2"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_5f4aw"]
@@ -285,8 +285,12 @@ limit_top = 0
 script = ExtResource("12_ilv2j")
 target = NodePath("../Player")
 
-[node name="Player" type="Node" parent="."]
+[node name="Player" type="Node" parent="." node_paths=PackedStringArray("spawn_point")]
 script = ExtResource("11_0sdvr")
 current_mode = 1
 ship_scene = ExtResource("12_ql4l8")
 mech_scene = ExtResource("13_f2hv2")
+spawn_point = NodePath("SpawnPos")
+
+[node name="SpawnPos" type="Marker2D" parent="Player"]
+position = Vector2(351, 83)

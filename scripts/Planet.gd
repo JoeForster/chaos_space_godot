@@ -15,12 +15,12 @@ func _enter_tree():
 
 func _on_body_entered(body):
 	if not Engine.is_editor_hint():
-		if body.is_in_group("PlayerShip"):
+		if body.is_in_group("player"):
 			landing = landing + 1
 
 func _on_body_exited(body):
 	if not Engine.is_editor_hint():
-		if body.is_in_group("PlayerShip"):
+		if body.is_in_group("player"):
 			landing = landing - 1
 			assert(landing >= 0)
 

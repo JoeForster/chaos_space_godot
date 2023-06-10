@@ -11,4 +11,4 @@ func _ready():
 func _physics_process(delta):
 	# TODO better way of getting at player pos
 	# (since the player node no longer holds position, the vehicle child does)
-	position = target.get_child(0).position
+	position = target.get_child(1).position

@@ -1,9 +1,9 @@
-[gd_scene load_steps=3 format=3 uid="uid://b84geh14xyf6u"]
+[gd_scene load_steps=3 format=3 uid="uid://snvsyejnqakk"]
 
 [ext_resource type="Script" path="res://scripts/PlayerPhysics.gd" id="1_ytqfs"]
 [ext_resource type="Texture2D" uid="uid://bk0bpb2ltdg8y" path="res://assets/topdown/fighter_td.png" id="2_uv48g"]
 
-[node name="PlayerShip" type="RigidBody2D" groups=["PlayerShip"]]
+[node name="PlayerShip" type="RigidBody2D" groups=["player"]]
 gravity_scale = 0.0
 angular_damp = 5.0
 script = ExtResource("1_ytqfs")
