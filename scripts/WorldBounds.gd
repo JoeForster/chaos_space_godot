@@ -9,3 +9,4 @@ func _ready():
 	playerCamera.limit_left = worldBoundsShape.position.x + position.x
 	playerCamera.limit_right = worldBoundsShape.end.x + position.x
 	playerCamera.limit_top = worldBoundsShape.position.y + position.y
+	

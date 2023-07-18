@@ -4,3 +4,4 @@ extends Node
 @export var system_pos : Vector2
 @export var system_pos_set = false
 @export var warping_in = false
+@export var hud_throttle : TextureProgressBar

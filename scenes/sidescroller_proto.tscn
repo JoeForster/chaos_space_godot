@@ -1,4 +1,4 @@
-[gd_scene load_steps=17 format=3 uid="uid://g85yj7uqxhv1"]
+[gd_scene load_steps=24 format=3 uid="uid://dkso3nq37epuc"]
 
 [ext_resource type="Texture2D" uid="uid://cg5a5o4iewhii" path="res://assets/sidescroller/parallax_bg/parallax-mountain-bg-1280.png" id="1_ob24a"]
 [ext_resource type="Texture2D" uid="uid://opinqxrvd1yg" path="res://assets/sidescroller/parallax_bg/parallax-mountain-montain-far-1280.png" id="2_fos3t"]
@@ -7,14 +7,14 @@
 [ext_resource type="Texture2D" uid="uid://bu7blssngx43k" path="res://assets/sidescroller/parallax_bg/parallax-mountain-foreground-trees-1280.png" id="5_fira0"]
 [ext_resource type="Texture2D" uid="uid://dl2lsf4c7anrp" path="res://assets/sidescroller/terrain_block.png" id="6_cusij"]
 [ext_resource type="PackedScene" uid="uid://bs1aiya1dtfiu" path="res://scenes/robot.tscn" id="7_mw5f8"]
+[ext_resource type="Script" path="res://scripts/PlayerLogic.gd" id="8_3elff"]
 [ext_resource type="Script" path="res://scripts/PlayerCamera.gd" id="10_bbjjk"]
-[ext_resource type="Script" path="res://scripts/PlayerControls.gd" id="11_n76yj"]
 [ext_resource type="PackedScene" uid="uid://0gcnvxo01amn" path="res://scenes/player_ship.tscn" id="12_me65n"]
 [ext_resource type="PackedScene" uid="uid://kuhecnpwdfnh" path="res://scenes/player_mech.tscn" id="13_dp2vj"]
+[ext_resource type="Script" path="res://scripts/DronePhysics.gd" id="13_f3kb1"]
 [ext_resource type="Script" path="res://scripts/Spawner.gd" id="14_4kytk"]
-
-[sub_resource type="RectangleShape2D" id="RectangleShape2D_5f4aw"]
-size = Vector2(5120, 720)
+[ext_resource type="PackedScene" uid="uid://dy7a7n7txu827" path="res://scenes/projectile.tscn" id="14_ougt8"]
+[ext_resource type="Texture2D" uid="uid://bs41ft4m2yp3b" path="res://assets/entity_placeholder.png" id="14_ut0h6"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_6bd5g"]
 size = Vector2(183.889, 1.11591)
@@ -22,8 +22,27 @@ size = Vector2(183.889, 1.11591)
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_s7ihi"]
 size = Vector2(8, 0.979167)
 
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_huxiq"]
+size = Vector2(2718, 721)
+
 [sub_resource type="CircleShape2D" id="CircleShape2D_6ll84"]
 radius = 400.0
+
+[sub_resource type="Gradient" id="Gradient_nag4y"]
+offsets = PackedFloat32Array(0, 0.0220339, 0.123729, 0.883051, 0.971186)
+colors = PackedColorArray(0, 0, 0, 1, 0.241156, 0.241156, 0.241156, 1, 0.386441, 0.386441, 0.386441, 1, 0.42281, 0.42281, 0.42281, 1, 0.215686, 0.215686, 0.215686, 1)
+
+[sub_resource type="GradientTexture1D" id="GradientTexture1D_n4ivx"]
+gradient = SubResource("Gradient_nag4y")
+
+[sub_resource type="Gradient" id="Gradient_xin62"]
+offsets = PackedFloat32Array(0, 0.311864, 1)
+colors = PackedColorArray(0, 0, 0, 1, 1, 0.697941, 0.303749, 1, 1, 1, 1, 1)
+
+[sub_resource type="GradientTexture2D" id="GradientTexture2D_twktt"]
+gradient = SubResource("Gradient_xin62")
+width = 256
+height = 32
 
 [node name="sidescroller_proto" type="Node2D"]
 
@@ -72,10 +91,9 @@ texture = ExtResource("5_fira0")
 centered = false
 
 [node name="World" type="Area2D" parent="."]
-
-[node name="WorldBounds" type="CollisionShape2D" parent="World"]
-position = Vector2(1017, 408)
-shape = SubResource("RectangleShape2D_5f4aw")
+monitoring = false
+monitorable = false
+metadata/_edit_group_ = true
 
 [node name="GroundTiled" type="Node2D" parent="World"]
 position = Vector2(-139, -58)
@@ -120,6 +138,11 @@ position = Vector2(128, 24.5)
 scale = Vector2(32, 48)
 shape = SubResource("RectangleShape2D_s7ihi")
 
+[node name="WorldBounds" type="CollisionShape2D" parent="World"]
+position = Vector2(1358, 362)
+shape = SubResource("RectangleShape2D_huxiq")
+disabled = true
+
 [node name="PlayerCamera" type="Camera2D" parent="." node_paths=PackedStringArray("target")]
 position = Vector2(565, 7)
 limit_left = 0
@@ -127,14 +150,17 @@ limit_top = 0
 script = ExtResource("10_bbjjk")
 target = NodePath("../Player")
 
-[node name="Player" type="Node" parent="." node_paths=PackedStringArray("spawn_point")]
-script = ExtResource("11_n76yj")
-current_mode = 1
+[node name="Player" type="Node" parent="." node_paths=PackedStringArray("spawn_point", "hud_throttle")]
+script = ExtResource("8_3elff")
 ship_scene = ExtResource("12_me65n")
 mech_scene = ExtResource("13_dp2vj")
 spawn_point = NodePath("SpawnPos")
+hud_throttle = NodePath("../HUD/Throttle")
 
 [node name="SpawnPos" type="Marker2D" parent="Player"]
+position = Vector2(351, 83)
+
+[node name="PlayerShip" parent="Player" instance=ExtResource("12_me65n")]
 position = Vector2(351, 83)
 
 [node name="Spawner" type="Area2D" parent="."]
@@ -145,5 +171,37 @@ spawned_scene = ExtResource("7_mw5f8")
 [node name="CollisionShape2D" type="CollisionShape2D" parent="Spawner"]
 position = Vector2(7.42114, 196.095)
 shape = SubResource("CircleShape2D_6ll84")
+
+[node name="HUD" type="CanvasLayer" parent="."]
+
+[node name="Throttle" type="TextureProgressBar" parent="HUD"]
+offset_right = 282.0
+offset_bottom = 42.0
+max_value = 1.0
+step = 0.0
+texture_under = SubResource("GradientTexture1D_n4ivx")
+texture_progress = SubResource("GradientTexture2D_twktt")
+
+[node name="HP" type="TextureProgressBar" parent="HUD"]
+offset_right = 282.0
+offset_bottom = 42.0
+texture_under = SubResource("GradientTexture1D_n4ivx")
+texture_progress = SubResource("GradientTexture2D_twktt")
+
+[node name="EnemyEntity" type="RigidBody2D" parent="."]
+position = Vector2(963, 468)
+gravity_scale = 0.0
+lock_rotation = true
+script = ExtResource("13_f3kb1")
+thrust = 500
+projectile_scene = ExtResource("14_ougt8")
+metadata/_edit_group_ = true
+
+[node name="Sprite2D" type="Sprite2D" parent="EnemyEntity"]
+scale = Vector2(0.91372, 0.91372)
+texture = ExtResource("14_ut0h6")
+
+[node name="CollisionPolygon2D" type="CollisionPolygon2D" parent="EnemyEntity"]
+polygon = PackedVector2Array(-39.7468, -27.1035, -34.7468, -4.10352, -38.7468, 18.8965, -20.7468, 28.8965, 0.253174, 45.8965, 18.2532, 30.8965, 38.2532, 23.8965, 35.2532, 0.896484, 41.2532, -24.1035, 23.2532, -32.1035, 3.25317, -45.1035, -17.7468, -34.1035)
 
 [connection signal="body_entered" from="Spawner" to="Spawner" method="_on_body_entered"]

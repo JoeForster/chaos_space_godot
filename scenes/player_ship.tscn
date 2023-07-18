@@ -4,7 +4,8 @@
 [ext_resource type="Texture2D" uid="uid://cea3c5hpxnnop" path="res://assets/sidescroller/mech/mech_flymode_lr.png" id="2_h6c7m"]
 
 [node name="PlayerShip" type="RigidBody2D" node_paths=PackedStringArray("world_bounds") groups=["player"]]
-gravity_scale = 0.0
+max_contacts_reported = 1
+contact_monitor = true
 linear_damp = 0.99
 script = ExtResource("1_p2nr5")
 fixed_rotation_rate = 3.0

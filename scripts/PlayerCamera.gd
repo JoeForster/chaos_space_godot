@@ -8,7 +8,9 @@ func _ready():
 	pass # Replace with function body.
 
 
-func _physics_process(delta):
+func _physics_process(_delta):
 	# TODO better way of getting at player pos
 	# (since the player node no longer holds position, the vehicle child does)
-	position = target.get_child(1).position
+	var player_vehicle =target.get_child(1)
+	if player_vehicle != null:
+		position = player_vehicle.position

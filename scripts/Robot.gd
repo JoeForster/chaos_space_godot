@@ -8,7 +8,6 @@ var moveDirection = 1
 var gravityDirection = Vector2(0, 1)
 
 func _update_fall_test():
-	var p = position
 	var projected_position = Vector2.ZERO
 	var collision_rect = $MainCollisionShape.get_shape().get_rect().size
 	projected_position.x += moveDirection * (collision_rect.x + FALL_TEST_MARGIN)

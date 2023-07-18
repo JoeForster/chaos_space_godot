@@ -1,4 +1,4 @@
-[gd_scene load_steps=31 format=3 uid="uid://bt15v2fgqyy6y"]
+[gd_scene load_steps=31 format=3]
 
 [ext_resource type="Texture2D" uid="uid://cg5a5o4iewhii" path="res://assets/sidescroller/parallax_bg/parallax-mountain-bg-1280.png" id="1_n538s"]
 [ext_resource type="Texture2D" uid="uid://opinqxrvd1yg" path="res://assets/sidescroller/parallax_bg/parallax-mountain-montain-far-1280.png" id="2_amig0"]
@@ -9,7 +9,7 @@
 [ext_resource type="Script" path="res://scripts/Robot.gd" id="7_5xpqw"]
 [ext_resource type="Shape2D" uid="uid://cwlt877pcdoo1" path="res://assets/robot_capsule_shape_2d.tres" id="8_egwf2"]
 [ext_resource type="Texture2D" uid="uid://bkb0i5k767dt7" path="res://assets/sidescroller/robot-spritesheet-transparent.png" id="9_4db8t"]
-[ext_resource type="Script" path="res://scripts/PlayerControls.gd" id="11_0sdvr"]
+[ext_resource type="Script" path="res://scripts/PlayerLogic.gd" id="11_0sdvr"]
 [ext_resource type="Script" path="res://scripts/PlayerCamera.gd" id="12_ilv2j"]
 [ext_resource type="PackedScene" uid="uid://0gcnvxo01amn" path="res://scenes/player_ship.tscn" id="12_ql4l8"]
 [ext_resource type="PackedScene" uid="uid://kuhecnpwdfnh" path="res://scenes/player_mech.tscn" id="13_f2hv2"]

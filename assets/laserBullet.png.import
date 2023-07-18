@@ -2,16 +2,16 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://bs41ft4m2yp3b"
-path="res://.godot/imported/entity_placeholder.png-f871402257dd817440b3766c611799f1.ctex"
+uid="uid://egrywnhi8h6g"
+path="res://.godot/imported/laserBullet.png-25f24cca23bd7a9ed08c39ad624341eb.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://assets/topdown/entity_placeholder.png"
-dest_files=["res://.godot/imported/entity_placeholder.png-f871402257dd817440b3766c611799f1.ctex"]
+source_file="res://assets/laserBullet.png"
+dest_files=["res://.godot/imported/laserBullet.png-25f24cca23bd7a9ed08c39ad624341eb.ctex"]
 
 [params]
 

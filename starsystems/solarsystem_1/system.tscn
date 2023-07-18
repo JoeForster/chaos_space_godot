@@ -1,4 +1,4 @@
-[gd_scene load_steps=16 format=3 uid="uid://gto4xmkyt3ox"]
+[gd_scene load_steps=16 format=3]
 
 [ext_resource type="Texture2D" uid="uid://cgrr26kfqa65a" path="res://assets/topdown/parallax_bg/BackdropBlackLittleSparkBlack.png" id="1_vj22l"]
 [ext_resource type="Texture2D" uid="uid://qm6d87pa4e8m" path="res://assets/topdown/parallax_bg/Parallax100.png" id="2_qqvsj"]
@@ -9,11 +9,11 @@
 [ext_resource type="SpriteFrames" uid="uid://cuao12qqxhe1h" path="res://planets/beta/sprite_frames.tres" id="9_dv50n"]
 [ext_resource type="Script" path="res://scripts/PlayerCamera.gd" id="9_odwpc"]
 [ext_resource type="PackedScene" uid="uid://ccqcds4nkn5cm" path="res://scenes/warp_point.tscn" id="9_q4cta"]
-[ext_resource type="PackedScene" uid="uid://b84geh14xyf6u" path="res://scenes/player_ship_system.tscn" id="10_qkj87"]
+[ext_resource type="PackedScene" uid="uid://snvsyejnqakk" path="res://scenes/player_ship_system.tscn" id="10_qkj87"]
 [ext_resource type="Script" path="res://scripts/DronePhysics.gd" id="12_dby25"]
 [ext_resource type="Texture2D" uid="uid://wsxgt288odn8" path="res://assets/topdown/Bomber2B.png" id="13_2oamo"]
 [ext_resource type="Script" path="res://starsystems/solarsystem_1/HunterEnemy.gd" id="13_nkwt7"]
-[ext_resource type="Texture2D" uid="uid://bs41ft4m2yp3b" path="res://assets/topdown/entity_placeholder.png" id="13_x6mxm"]
+[ext_resource type="Texture2D" uid="uid://bs41ft4m2yp3b" path="res://assets/entity_placeholder.png" id="13_x6mxm"]
 
 [sub_resource type="Curve2D" id="Curve2D_668rs"]
 _data = {
