@@ -40,7 +40,7 @@ func update_mode():
 			ship_node.queue_free()
 		if mech_node == null:
 			var scene_instance = mech_scene.instantiate()
-			scene_instance.sePlay_name(MECH_NODE_NAME)
+			scene_instance.set_name(MECH_NODE_NAME)
 			scene_instance.position = vehicle_pos
 			add_child(scene_instance)
 

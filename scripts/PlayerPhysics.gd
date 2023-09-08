@@ -103,14 +103,17 @@ func _physics_process_horizontal_throttle(delta):
 	if world_bounds != null:
 		var world_bounds_rect = world_bounds.shape.get_rect()
 		world_bounds_rect.position += world_bounds.position
-		if position.y > world_bounds_rect.end.y:
-			global_thrust.y = -1
-		elif position.y < world_bounds_rect.position.y:
+		
+		if position.y < world_bounds_rect.position.y:
 			global_thrust.y = 1
-		if position.x > world_bounds_rect.end.x:
-			global_thrust.x = -1
-		elif position.x < world_bounds_rect.position.x:
-			global_thrust.x = 1
+		# TODO delete probably, this is done by a wall for now
+		##elif position.y > world_bounds_rect.end.y:
+		#	global_thrust.y = -1
+		
+		##if position.x > world_bounds_rect.end.x:
+		##	global_thrust.x = -1
+		##elif position.x < world_bounds_rect.position.x:
+		##	global_thrust.x = 1
 	
 	if global_thrust != Vector2.ZERO:
 		global_thrust = global_thrust.normalized() * max_thrust
