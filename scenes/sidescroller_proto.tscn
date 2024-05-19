@@ -18,18 +18,21 @@
 [ext_resource type="Texture2D" uid="uid://bs41ft4m2yp3b" path="res://assets/entity_placeholder.png" id="14_ut0h6"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_s7ihi"]
-size = Vector2(3.34375, 4.89583)
+size = Vector2(7.96875, 1.02083)
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_huxiq"]
 size = Vector2(2718, 721)
 
 [sub_resource type="WorldBoundaryShape2D" id="WorldBoundaryShape2D_1eg7n"]
+distance = 70.0
 
 [sub_resource type="WorldBoundaryShape2D" id="WorldBoundaryShape2D_ihq4h"]
 normal = Vector2(1, 0)
+distance = 131.0
 
 [sub_resource type="WorldBoundaryShape2D" id="WorldBoundaryShape2D_n7h1x"]
 normal = Vector2(-1, 0)
+distance = 14.0
 
 [sub_resource type="CircleShape2D" id="CircleShape2D_6ll84"]
 radius = 400.0
@@ -121,7 +124,7 @@ stretch_mode = 1
 metadata/_edit_use_anchors_ = true
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="World/GroundTiled2/GroundBlock"]
-position = Vector2(128, 24.5)
+position = Vector2(128.5, 23.5)
 scale = Vector2(32, 48)
 shape = SubResource("RectangleShape2D_s7ihi")
 
@@ -144,8 +147,7 @@ stretch_mode = 1
 metadata/_edit_use_anchors_ = true
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="World/BoundsBottom"]
-position = Vector2(1994, 73)
-scale = Vector2(32, 48)
+position = Vector2(1995, 71)
 shape = SubResource("WorldBoundaryShape2D_1eg7n")
 
 [node name="BoundsLeft" type="StaticBody2D" parent="World"]
@@ -164,8 +166,6 @@ stretch_mode = 1
 metadata/_edit_use_anchors_ = true
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="World/BoundsLeft"]
-position = Vector2(84, 7)
-scale = Vector2(32, 48)
 shape = SubResource("WorldBoundaryShape2D_ihq4h")
 
 [node name="BoundsRight" type="StaticBody2D" parent="World"]
@@ -175,8 +175,6 @@ position = Vector2(4120, 812)
 metadata/_edit_group_ = true
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="World/BoundsRight"]
-position = Vector2(31, 30)
-scale = Vector2(32, 48)
 shape = SubResource("WorldBoundaryShape2D_n7h1x")
 
 [node name="GroundBlock" type="TextureRect" parent="World/BoundsRight"]
@@ -207,6 +205,8 @@ position = Vector2(351, 83)
 
 [node name="PlayerShip" parent="Player" instance=ExtResource("12_me65n")]
 position = Vector2(351, 83)
+gravity_scale = 0.0
+input_type = 1
 
 [node name="Spawner" type="Area2D" parent="."]
 position = Vector2(1059.58, -229.095)

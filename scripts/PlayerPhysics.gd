@@ -5,10 +5,13 @@ enum INPUT_TYPE { KINEMATIC, HORIZONTAL_DIRECTIONAL, HORIZONTAL_THROTTLE, TOP_DO
 @export var input_type = INPUT_TYPE.HORIZONTAL_THROTTLE
 @export var throttle_per_sec = 1.0
 @export var thrust_change_per_sec = 1000
+@export var directional_min_lift = 1.0
 @export var lift_thrust_proportion = 0.3
 @export var lift_gravity_scaler = 0.5
 @export var max_speed = 800
 @export var max_thrust = 1000
+@export var max_lift_thrust = 700
+@export var max_thrust_y = 500
 @export var max_torque = 1000
 @export var fixed_rotation_rate = 2.0
 @export var brake_damp = 0.995
@@ -48,24 +51,24 @@ func _physics_process_horizontal_directional(delta):
 	var facing_right = !$PlayerSprite2D.is_flipped_h()
 	var thrust_local = Vector2.ZERO
 	thrust_local.x = input_directional.x * max_thrust
-	thrust_local.y = -input_directional.y * max_thrust
+	thrust_local.y = -input_directional.y * max_thrust_y
 
 	# Apply "lift" by scaling gravity against thrust
 	var cur_thrust_amount = thrust_local.length()
-	var new_gravity_scale = 1.0 - min(1.0, cur_thrust_amount / max_thrust * lift_thrust_proportion)
-	new_gravity_scale *= lift_gravity_scaler
-	set_gravity_scale(new_gravity_scale)	
-	
+	var lift_value = lerpf(directional_min_lift, 1.0, cur_thrust_amount/max_thrust)
+	var new_gravity_scale = 1.0 - lift_value
+	set_gravity_scale(new_gravity_scale)
+
 	if thrust_local.length() > 0:
 		if is_lock_rotation_enabled():
-			var global_thrust = thrust_local.rotated(hack_rotation)
+			var global_thrust = thrust_local#.rotated(hack_rotation)
 			apply_central_force(global_thrust)
 		else:
 			var global_thrust = transform.basis_xform(thrust_local)
 			apply_central_force(global_thrust)
 
 	#apply_torque(thrust_local.y * max_torque)
-	var target_rotation = clampf(asin(input_directional.y), -max_pitch_angle, max_pitch_angle)
+	var target_rotation = 0#clampf(asin(input_directional.y), -max_pitch_angle, max_pitch_angle)
 
 	if facing_right:
 		target_rotation = -target_rotation
@@ -206,6 +209,10 @@ func _physics_process(delta):
 	#var bodies = get_colliding_bodies()
 	#print("Player colliding with %d bodies" % [bodies.size()])
 	
+	var facing_right_sign = 1 if !$PlayerSprite2D.is_flipped_h() else -1
+	$ShipCollision.scale.x = facing_right_sign
+	
+	
 func _integrate_forces(state):
 	# On returning from a planet or galaxy map, place the ship in the correct warp/planet position
 	# TODO is there a less hacky way to do this? Probably create/spawn the ship on scene change rather than moving.
@@ -243,13 +250,26 @@ func _process(delta):
 	input_look.y += Input.get_action_strength("look_up")
 	input_look.y -= Input.get_action_strength("look_down")
 
-	if Input.is_action_pressed("throttle_up"):
-		input_throttle = min(1.0, input_throttle + delta * throttle_per_sec)
-	if Input.is_action_pressed("throttle_down"):
-		input_throttle = max(0.0, input_throttle - delta * throttle_per_sec)
-		braking = (input_throttle == 0.0)
-	else:
+	# Process throttle input and logic, which depends on the input mode.
+
+	var throttle_delta = delta * throttle_per_sec
+	if input_type == INPUT_TYPE.HORIZONTAL_THROTTLE || input_type == INPUT_TYPE.TOP_DOWN:
+		if Input.is_action_pressed("throttle_up"):
+			input_throttle = min(1.0, input_throttle + throttle_delta)
+		if Input.is_action_pressed("throttle_down"):
+			input_throttle = max(0.0, input_throttle - throttle_delta)
+			braking = (input_throttle == 0.0)
+		else:
+			braking = false
+	elif input_type == INPUT_TYPE.HORIZONTAL_DIRECTIONAL:
+		var facing_right_sign = 1 if !$PlayerSprite2D.is_flipped_h() else -1
+		var throttle_rate_signed = input_directional.x * facing_right_sign
+		if throttle_rate_signed > 0:
+			input_throttle = min(1.0, input_throttle + throttle_rate_signed * throttle_delta)
+		else:
+			input_throttle = max(0.0, input_throttle - throttle_delta)
 		braking = false
+		
 
 	if PlayerState.hud_throttle != null:
 		PlayerState.hud_throttle.value = input_throttle

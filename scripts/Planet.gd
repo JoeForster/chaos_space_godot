@@ -36,4 +36,3 @@ func _process(delta):
 				PlayerState.system_pos_set = true
 				var planet_scene_path = "res://planets/" + planetID + "/surface.tscn"
 				get_tree().change_scene_to_file(planet_scene_path)
-				
