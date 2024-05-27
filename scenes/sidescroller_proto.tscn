@@ -1,4 +1,4 @@
-[gd_scene load_steps=27 format=3 uid="uid://dkso3nq37epuc"]
+[gd_scene load_steps=35 format=3 uid="uid://dkso3nq37epuc"]
 
 [ext_resource type="Texture2D" uid="uid://cg5a5o4iewhii" path="res://assets/sidescroller/parallax_bg/parallax-mountain-bg-1280.png" id="1_ob24a"]
 [ext_resource type="Texture2D" uid="uid://opinqxrvd1yg" path="res://assets/sidescroller/parallax_bg/parallax-mountain-montain-far-1280.png" id="2_fos3t"]
@@ -7,8 +7,9 @@
 [ext_resource type="Texture2D" uid="uid://bu7blssngx43k" path="res://assets/sidescroller/parallax_bg/parallax-mountain-foreground-trees-1280.png" id="5_fira0"]
 [ext_resource type="Texture2D" uid="uid://dl2lsf4c7anrp" path="res://assets/sidescroller/terrain_block.png" id="6_cusij"]
 [ext_resource type="PackedScene" uid="uid://bs1aiya1dtfiu" path="res://scenes/robot.tscn" id="7_mw5f8"]
-[ext_resource type="Texture2D" uid="uid://b0mjhmp2typ4n" path="res://assets/sidescroller/rock_bg.png" id="7_yayk3"]
+[ext_resource type="Texture2D" uid="uid://cicr0fv47t5c4" path="res://assets/sidescroller/tree_floor.png" id="7_vk8sp"]
 [ext_resource type="Script" path="res://scripts/PlayerLogic.gd" id="8_3elff"]
+[ext_resource type="Texture2D" uid="uid://dlq1yx4i716sf" path="res://assets/sidescroller/forcefield.png" id="8_l2k1a"]
 [ext_resource type="Script" path="res://scripts/PlayerCamera.gd" id="10_bbjjk"]
 [ext_resource type="PackedScene" uid="uid://0gcnvxo01amn" path="res://scenes/player_ship.tscn" id="12_me65n"]
 [ext_resource type="PackedScene" uid="uid://kuhecnpwdfnh" path="res://scenes/player_mech.tscn" id="13_dp2vj"]
@@ -16,6 +17,7 @@
 [ext_resource type="Script" path="res://scripts/Spawner.gd" id="14_4kytk"]
 [ext_resource type="PackedScene" uid="uid://dy7a7n7txu827" path="res://scenes/projectile.tscn" id="14_ougt8"]
 [ext_resource type="Texture2D" uid="uid://bs41ft4m2yp3b" path="res://assets/entity_placeholder.png" id="14_ut0h6"]
+[ext_resource type="Script" path="res://scripts/FollowCameraY.gd" id="18_yveri"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_s7ihi"]
 size = Vector2(7.96875, 1.02083)
@@ -29,6 +31,61 @@ distance = 70.0
 [sub_resource type="WorldBoundaryShape2D" id="WorldBoundaryShape2D_ihq4h"]
 normal = Vector2(1, 0)
 distance = 131.0
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_qnd6v"]
+atlas = ExtResource("8_l2k1a")
+region = Rect2(0, 0, 256, 205)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_b53w4"]
+atlas = ExtResource("8_l2k1a")
+region = Rect2(256, 0, 256, 205)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_x83e3"]
+atlas = ExtResource("8_l2k1a")
+region = Rect2(512, 0, 256, 205)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_mnf1f"]
+atlas = ExtResource("8_l2k1a")
+region = Rect2(1024, 0, 256, 205)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_xb3k4"]
+atlas = ExtResource("8_l2k1a")
+region = Rect2(768, 0, 256, 205)
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_ynaib"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_qnd6v")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_b53w4")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_x83e3")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_mnf1f")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_xb3k4")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_mnf1f")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_x83e3")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_b53w4")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_qnd6v")
+}],
+"loop": true,
+"name": &"default",
+"speed": 14.0
+}]
 
 [sub_resource type="WorldBoundaryShape2D" id="WorldBoundaryShape2D_n7h1x"]
 normal = Vector2(-1, 0)
@@ -64,7 +121,6 @@ texture = ExtResource("1_ob24a")
 centered = false
 
 [node name="mountain-far" type="ParallaxLayer" parent="ParallaxBackground"]
-position = Vector2(0, -1)
 motion_scale = Vector2(0.1, 0.1)
 motion_mirroring = Vector2(1280, 0)
 
@@ -77,7 +133,7 @@ motion_scale = Vector2(0.4, 0.4)
 motion_mirroring = Vector2(1280, 0)
 
 [node name="mountain-sprite" type="Sprite2D" parent="ParallaxBackground/mountains"]
-position = Vector2(4, 339)
+position = Vector2(0, 377)
 texture = ExtResource("3_tvkjg")
 centered = false
 
@@ -86,7 +142,7 @@ motion_scale = Vector2(0.6, 0.6)
 motion_mirroring = Vector2(1280, 0)
 
 [node name="trees-sprite" type="Sprite2D" parent="ParallaxBackground/trees"]
-position = Vector2(4, 339)
+position = Vector2(0, 377)
 texture = ExtResource("4_tiolk")
 centered = false
 
@@ -95,7 +151,7 @@ motion_scale = Vector2(0.8, 0.8)
 motion_mirroring = Vector2(1280, 0)
 
 [node name="foreground-trees-sprite" type="Sprite2D" parent="ParallaxBackground/foreground-trees"]
-position = Vector2(4, 339)
+position = Vector2(0, 377)
 texture = ExtResource("5_fira0")
 centered = false
 
@@ -142,7 +198,7 @@ metadata/_edit_group_ = true
 [node name="GroundBlock" type="TextureRect" parent="World/BoundsBottom"]
 offset_right = 20000.0
 offset_bottom = 128.0
-texture = ExtResource("7_yayk3")
+texture = ExtResource("7_vk8sp")
 stretch_mode = 1
 metadata/_edit_use_anchors_ = true
 
@@ -153,20 +209,61 @@ shape = SubResource("WorldBoundaryShape2D_1eg7n")
 [node name="BoundsLeft" type="StaticBody2D" parent="World"]
 texture_filter = 3
 texture_repeat = 2
-position = Vector2(0, 812)
+position = Vector2(-36, 689)
 metadata/_edit_group_ = true
-
-[node name="GroundBlock" type="TextureRect" parent="World/BoundsLeft"]
-offset_left = 4.0
-offset_top = -1999.0
-offset_right = 132.0
-offset_bottom = 1.0
-texture = ExtResource("7_yayk3")
-stretch_mode = 1
-metadata/_edit_use_anchors_ = true
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="World/BoundsLeft"]
 shape = SubResource("WorldBoundaryShape2D_ihq4h")
+
+[node name="BoundsForceFieldVisual" type="Node2D" parent="World/BoundsLeft" node_paths=PackedStringArray("to_follow")]
+position = Vector2(29, -1)
+script = ExtResource("18_yveri")
+to_follow = NodePath("../../../PlayerCamera")
+
+[node name="ForceFieldSprite" type="AnimatedSprite2D" parent="World/BoundsLeft/BoundsForceFieldVisual"]
+texture_repeat = 2
+position = Vector2(75, -384)
+scale = Vector2(0.5, 1)
+sprite_frames = SubResource("SpriteFrames_ynaib")
+autoplay = "default"
+frame = 2
+frame_progress = 0.910845
+
+[node name="ForceFieldSprite2" type="AnimatedSprite2D" parent="World/BoundsLeft/BoundsForceFieldVisual"]
+texture_repeat = 2
+position = Vector2(75, -192)
+scale = Vector2(0.5, 1)
+sprite_frames = SubResource("SpriteFrames_ynaib")
+autoplay = "default"
+frame = 2
+frame_progress = 0.910845
+
+[node name="ForceFieldSprite3" type="AnimatedSprite2D" parent="World/BoundsLeft/BoundsForceFieldVisual"]
+texture_repeat = 2
+position = Vector2(75, 0)
+scale = Vector2(0.5, 1)
+sprite_frames = SubResource("SpriteFrames_ynaib")
+autoplay = "default"
+frame = 2
+frame_progress = 0.910845
+
+[node name="ForceFieldSprite4" type="AnimatedSprite2D" parent="World/BoundsLeft/BoundsForceFieldVisual"]
+texture_repeat = 2
+position = Vector2(75, 192)
+scale = Vector2(0.5, 1)
+sprite_frames = SubResource("SpriteFrames_ynaib")
+autoplay = "default"
+frame = 2
+frame_progress = 0.910845
+
+[node name="ForceFieldSprite5" type="AnimatedSprite2D" parent="World/BoundsLeft/BoundsForceFieldVisual"]
+texture_repeat = 2
+position = Vector2(75, 384)
+scale = Vector2(0.5, 1)
+sprite_frames = SubResource("SpriteFrames_ynaib")
+autoplay = "default"
+frame = 2
+frame_progress = 0.910845
 
 [node name="BoundsRight" type="StaticBody2D" parent="World"]
 texture_filter = 3
@@ -177,19 +274,61 @@ metadata/_edit_group_ = true
 [node name="CollisionShape2D" type="CollisionShape2D" parent="World/BoundsRight"]
 shape = SubResource("WorldBoundaryShape2D_n7h1x")
 
-[node name="GroundBlock" type="TextureRect" parent="World/BoundsRight"]
-offset_left = -15.0
-offset_top = -2003.0
-offset_right = 113.0
-offset_bottom = -3.0
-texture = ExtResource("7_yayk3")
-stretch_mode = 1
-metadata/_edit_use_anchors_ = true
+[node name="BoundsForceFieldVisual" type="Node2D" parent="World/BoundsRight" node_paths=PackedStringArray("to_follow")]
+position = Vector2(-59, -489)
+script = ExtResource("18_yveri")
+to_follow = NodePath("../../../PlayerCamera")
+
+[node name="ForceFieldSprite" type="AnimatedSprite2D" parent="World/BoundsRight/BoundsForceFieldVisual"]
+texture_repeat = 2
+position = Vector2(75, -384)
+scale = Vector2(0.5, 1)
+sprite_frames = SubResource("SpriteFrames_ynaib")
+autoplay = "default"
+frame = 2
+frame_progress = 0.910845
+
+[node name="ForceFieldSprite2" type="AnimatedSprite2D" parent="World/BoundsRight/BoundsForceFieldVisual"]
+texture_repeat = 2
+position = Vector2(75, -192)
+scale = Vector2(0.5, 1)
+sprite_frames = SubResource("SpriteFrames_ynaib")
+autoplay = "default"
+frame = 2
+frame_progress = 0.910845
+
+[node name="ForceFieldSprite3" type="AnimatedSprite2D" parent="World/BoundsRight/BoundsForceFieldVisual"]
+texture_repeat = 2
+position = Vector2(75, 0)
+scale = Vector2(0.5, 1)
+sprite_frames = SubResource("SpriteFrames_ynaib")
+autoplay = "default"
+frame = 2
+frame_progress = 0.910845
+
+[node name="ForceFieldSprite4" type="AnimatedSprite2D" parent="World/BoundsRight/BoundsForceFieldVisual"]
+texture_repeat = 2
+position = Vector2(75, 192)
+scale = Vector2(0.5, 1)
+sprite_frames = SubResource("SpriteFrames_ynaib")
+autoplay = "default"
+frame = 2
+frame_progress = 0.910845
+
+[node name="ForceFieldSprite5" type="AnimatedSprite2D" parent="World/BoundsRight/BoundsForceFieldVisual"]
+texture_repeat = 2
+position = Vector2(75, 384)
+scale = Vector2(0.5, 1)
+sprite_frames = SubResource("SpriteFrames_ynaib")
+autoplay = "default"
+frame = 2
+frame_progress = 0.910845
 
 [node name="PlayerCamera" type="Camera2D" parent="." node_paths=PackedStringArray("target")]
 position = Vector2(565, 7)
 limit_left = 0
 limit_top = 0
+limit_bottom = 980
 script = ExtResource("10_bbjjk")
 target = NodePath("../Player")
 
